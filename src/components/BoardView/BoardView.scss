@@ -1,0 +1,26 @@
+@import "../../vars";
+
+.container {
+  // background: $bg;
+  // margin: auto;
+  display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // flex-flow: column;
+  max-width: 100%;
+  // min-height: 100vh;
+  // color: #4c4c4c;
+  color: $text;
+  & h1 {
+    color: $text;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+  align-items: center;
+  background: $bg3;
+  color: $textLight;
+}

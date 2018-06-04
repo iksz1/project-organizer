@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`can add a card 1`] = `
+Object {
+  "boardId": 1,
+  "cards": Array [
+    Object {
+      "boardId": 1,
+      "deleted": false,
+      "id": 1,
+      "labelId": 0,
+      "listId": 1,
+      "order": 0,
+      "text": "add theming",
+    },
+  ],
+  "deleted": false,
+  "id": 1,
+  "name": "ideas",
+  "order": 0,
+}
+`;
+
+exports[`creates instance successfully 1`] = `
+Object {
+  "boardId": 1,
+  "cards": Array [],
+  "deleted": false,
+  "id": 1,
+  "name": "features",
+  "order": 0,
+}
+`;

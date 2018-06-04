@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`can add list 1`] = `
+Object {
+  "deleted": false,
+  "id": 1,
+  "lists": Array [
+    Object {
+      "boardId": 1,
+      "cards": Array [],
+      "deleted": false,
+      "id": 1,
+      "name": "ideas",
+      "order": 0,
+    },
+  ],
+  "name": "My new project",
+  "order": 0,
+}
+`;
+
+exports[`can move card 1`] = `
+Object {
+  "deleted": false,
+  "id": 1,
+  "lists": Array [
+    Object {
+      "boardId": 1,
+      "cards": Array [],
+      "deleted": false,
+      "id": 1,
+      "name": "first",
+      "order": 0,
+    },
+    Object {
+      "boardId": 1,
+      "cards": Array [
+        Object {
+          "boardId": 1,
+          "deleted": false,
+          "id": 1,
+          "labelId": 0,
+          "listId": 2,
+          "order": 0,
+          "text": "free card",
+        },
+      ],
+      "deleted": false,
+      "id": 2,
+      "name": "second",
+      "order": 0,
+    },
+  ],
+  "name": "My new project",
+  "order": 0,
+}
+`;
+
+exports[`creates instance successfully 1`] = `
+Object {
+  "deleted": false,
+  "id": 1,
+  "lists": Array [],
+  "name": "Project Kangaroo",
+  "order": 0,
+}
+`;

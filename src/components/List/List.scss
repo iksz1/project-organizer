@@ -1,0 +1,70 @@
+@import "../../vars";
+
+.list {
+  flex: none;
+  width: 320px;
+  margin: 1em;
+  will-change: transform, opacity;
+  animation: appear 1s ease;
+}
+
+.box {
+  padding: 0.5em 1em;
+  margin-bottom: 0.5em;
+  &:first-child {
+    margin-top: 0.5em;
+  }
+  // background: $bg;
+  // width: 376px;
+  // height: 20vw
+  // padding: 2em 1em;
+  // background: #cbcebc;
+  background: $bg;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  // border: 1px solid #d5d5d5;
+  // border-radius: 1em;
+  // box-shadow: 1px 1px 5px 0px #b1b1b1;
+
+  // animation-delay: 400ms;
+  // animation-fill-mode: backwards;
+  // animation-direction: reverse;
+}
+
+.header {
+  padding: 0.5em 1em;
+  background: $bg3;
+  color: $textLight;
+  // font-weight: 500;
+}
+
+// main {
+//   padding: 1em 1em;
+//   line-height: 1.6;
+// }
+
+.footer {
+  font-size: small;
+  padding: 1em;
+  // text-align: center;
+  // border-top: 1px solid #d5d5d5;
+  background: $bg3;
+  color: $textLight;
+}
+
+.drag-class {
+  border: 2px solid red;
+  opacity: 0.5;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+    // transform: scale(0.1, 0.1, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    // transform: scale(1, 1, 1);
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "presets": [
+    ["@babel/env", { "targets": { "chrome": 48 }, "useBuiltIns": "usage", "modules": false }],
+    ["@babel/stage-2", { "decoratorsLegacy": true }],
+    "@babel/react"
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": "@babel/runtime"
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": ["@babel/env"]
+    }
+  }
+}

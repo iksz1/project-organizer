@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creates instance successfully 1`] = `
+Object {
+  "boardId": 1,
+  "deleted": false,
+  "id": 1,
+  "labelId": 0,
+  "listId": 1,
+  "order": 0,
+  "text": "correct",
+}
+`;
