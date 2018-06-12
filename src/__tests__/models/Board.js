@@ -1,31 +1,42 @@
+import db from "../../utils/dbWrapper";
 import { Board } from "../../models/Board";
+
+jest.mock("../../utils/dbWrapper");
 
 const boardData = {
   id: 1,
   name: "My new project"
 };
 
-it("creates instance successfully", () => {
+it("creates instance successfully", async () => {
   const board = Board.create(boardData);
-  board.changeName("Project Kangaroo");
+  db.update.mockResolvedValue();
+  await board.changeName("Project Kangaroo");
   expect(board.toJSON()).toMatchSnapshot();
 });
 
-it("can add list", () => {
+it("can add list", async () => {
   const board = Board.create(boardData);
-  board.addList("ideas");
+  db.add = jest.fn((table, list) => Promise.resolve({ ...list, id: 1 }));
+  await board.addList("ideas");
   expect(board.toJSON()).toMatchSnapshot();
 });
 
-it("can move card", () => {
+it("can move card", async () => {
   const card = { id: 1, listId: 1, boardId: 1, text: "free card" };
   const lists = [
     { id: 1, boardId: 1, name: "first", cards: [card] },
     { id: 2, boardId: 1, name: "second", cards: [] }
   ];
-  const meta = { fromList: 1, fromIndex: 0, toList: 2, toIndex: 0 };
   const board = Board.create({ ...boardData, lists });
+  const meta = {
+    fromArr: board.lists[0].cards,
+    fromIndex: 0,
+    toArr: board.lists[1].cards,
+    toIndex: 0
+  };
 
-  board.moveCard(card, meta);
+  db.update.mockResolvedValue();
+  await board.moveCard(board.lists[0].cards[0], meta);
   expect(board.toJSON()).toMatchSnapshot();
 });

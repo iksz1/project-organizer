@@ -1,4 +1,7 @@
+import db from "../../utils/dbWrapper";
 import { Card } from "../../models/Card";
+
+jest.mock("../../utils/dbWrapper");
 
 const cardData = {
   id: 1,
@@ -7,8 +10,9 @@ const cardData = {
   text: "decorators are stage-2"
 };
 
-it("creates instance successfully", () => {
+it("creates instance successfully", async () => {
   const card = Card.create(cardData);
-  card.changeText("correct");
+  db.update.mockResolvedValue();
+  await card.changeText("correct");
   expect(card.toJSON()).toMatchSnapshot();
 });

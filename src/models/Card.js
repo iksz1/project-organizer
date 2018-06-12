@@ -13,7 +13,7 @@ export const Card = types
   })
   .actions(self => ({
     changeText: flow(function* changeText(text) {
-      const card = yield db.update("cards", { ...self.toJSON(), text });
-      self.text = card.text;
+      yield db.update("cards", { id: self.id, text });
+      self.text = text;
     })
   }));

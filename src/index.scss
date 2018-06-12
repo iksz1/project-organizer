@@ -18,7 +18,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background: #a7b496;
+  background: $bgMain;
   color: $text;
 }
 
@@ -29,6 +29,12 @@ h2,
 h3,
 h4 {
   font-weight: 500;
+}
+
+input,
+textarea,
+select {
+  color: $text;
 }
 
 :global(.box) {

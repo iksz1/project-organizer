@@ -15,15 +15,21 @@ const get = (table, id) => {
 };
 
 const add = (table, item) => {
-  return update(table, { ...item, deleted: false });
-  // .then(item =>
-  //   update(table, { ...item, order: item.id * 100 })
-  // );
+  // return update(table, { ...item, deleted: false });
+  if (table && item) {
+    return db[table].add({ ...item, deleted: false }).then(id => get(table, id));
+  }
 };
 
 const update = (table, item) => {
   if (table && item) {
-    return db[table].put(item).then(id => get(table, id));
+    return db[table].update(item.id, item);
+  }
+};
+
+const bulkPut = (table, items) => {
+  if (table && items) {
+    return db[table].bulkPut(items);
   }
 };
 
@@ -41,21 +47,23 @@ const remove = (table, id) => {
 };
 
 const getAllBoards = () => {
-  return db.boards.where({ deleted: false }).toArray();
+  // return db.boards.where({ deleted: false }).sortBy("order");
+  return db.boards
+    .orderBy(":id")
+    .filter(board => !board.deleted)
+    .sortBy("order");
 };
 
 const getListsByBoard = boardId => {
   return db.lists.where({ boardId, deleted: false }).sortBy("order");
-  // .toArray();
 };
 
-const getCardsByList = listId => {
-  return db.cards.where({ id: listId, deleted: false }).sortBy("order");
-  // .toArray();
-};
+// const getCardsByList = listId => {
+//   return db.cards.where({ id: listId, deleted: false }).sortBy("order");
+// };
 
 const getCardsByBoard = boardId => {
-  return db.cards.where({ boardId, deleted: false }).toArray();
+  return db.cards.where({ boardId, deleted: false }).sortBy("order");
 };
 
 const getBoardRelated = id => {
@@ -69,4 +77,4 @@ const getBoardRelated = id => {
   );
 };
 
-export default { get, add, update, remove, getAllBoards, getBoardRelated };
+export default { get, add, update, remove, bulkPut, getAllBoards, getBoardRelated };

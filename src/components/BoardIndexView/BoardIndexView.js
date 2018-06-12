@@ -1,34 +1,37 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { observer } from "mobx-react";
+import MainHeader from "../MainHeader/MainHeader";
+import style from "./BoardIndexView.scss";
+import AddItem from "../AddItem/AddItem";
 
-export default class BoardIndexView extends Component {
+@observer
+class BoardIndexView extends Component {
   static propTypes = {
-    boards: PropTypes.object
-  };
-
-  state = {
-    inputValue: ""
-  };
-
-  onInputChange = e => {
-    this.setState({ inputValue: e.target.value });
+    boards: PropTypes.object,
+    onAdd: PropTypes.func
   };
 
   render() {
-    const { inputValue } = this.state;
-    const { handleCreate } = this.props;
+    const { boards, onAdd } = this.props;
 
     return (
-      <div>
-        <p>board index</p>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={this.onInputChange}
-          placeholder="board name"
-        />
-        <button onClick={() => handleCreate(inputValue)}>submit</button>
-      </div>
+      <Fragment>
+        <MainHeader title="Board index" showHomeBtn={false} />
+        <AddItem onSubmit={onAdd} hint="add board" />
+        <div className={style.container}>
+          <ul className={style.list}>
+            {boards.map(board => (
+              <li key={board.id}>
+                <Link to={`/boards/${board.id}`}>{board.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Fragment>
     );
   }
 }
+
+export default BoardIndexView;

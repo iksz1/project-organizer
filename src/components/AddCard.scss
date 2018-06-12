@@ -1,0 +1,6 @@
+@import "../vars";
+@import "./EditForm";
+
+.add-form {
+  @extend .edit-form;
+}

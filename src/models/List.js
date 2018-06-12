@@ -1,6 +1,7 @@
-import { types, flow, destroy, onPatch } from "mobx-state-tree";
+import { types, flow, destroy } from "mobx-state-tree";
 import { Card } from "./Card";
 import db from "../utils/dbWrapper";
+import calcOrder from "../utils/reorderHelper";
 
 export const List = types
   .model("List", {
@@ -12,13 +13,9 @@ export const List = types
     deleted: types.optional(types.boolean, false)
   })
   .actions(self => ({
-    afterCreate() {
-      onPatch(self, snap => console.log(snap));
-    },
-
     changeName: flow(function* changeName(name) {
-      const list = yield db.update("lists", { ...self.toJSON(), name, cards: [] });
-      self.name = list.name;
+      yield db.update("lists", { id: self.id, name });
+      self.name = name;
     }),
 
     addCard: flow(function* addCard(text) {
@@ -26,20 +23,12 @@ export const List = types
         text,
         listId: self.id,
         boardId: self.boardId,
-        order: self.cards.length
+        order: calcOrder({ toArr: self.cards })
       });
       self.cards.push(card);
     }),
 
-    // updateCard: flow(function* updateCard(id, payload) {
-    //   const index = self.cards.findIndex(item => item.id === id);
-    //   const card = self.cards[index];
-    //   self.cards[index] = { ...self.cards[index], ...payload };
-    // }),
-
     deleteCard: flow(function* deleteCard(item) {
-      // const index = self.cards.findIndex(item => item.id === id);
-      // self.cards.splice(index, 1);
       yield db.remove("cards", item.id);
       destroy(item);
     })

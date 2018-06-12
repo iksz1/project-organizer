@@ -1,0 +1,21 @@
+@import "../vars";
+
+.edit-form {
+  margin-top: 0.2em;
+  & textarea {
+    width: 100%;
+    resize: vertical;
+    background: lighten($bg, 10%);
+    border: $borderInput;
+    border-radius: 0.2em;
+  }
+  & button {
+    background: $bg2;
+    border: 1px solid $bg2;
+    color: #fff;
+    border-radius: 2px;
+    &:hover {
+      background: darken($bg2, 5%);
+    }
+  }
+}

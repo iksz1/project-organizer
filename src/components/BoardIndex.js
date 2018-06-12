@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import BoardIndexView from "./BoardIndexView/BoardIndexView";
+import { observer } from "mobx-react";
+import store from "../stores/BoardIndexStore";
 
+@observer
 class BoardIndex extends Component {
-  // static propTypes = {
-  //   prop: PropTypes
-  // };
+  componentDidMount() {
+    store.fetchData();
+  }
 
   render() {
-    return <BoardIndexView handleCreate={this.onBoardCreate} />;
+    return <BoardIndexView boards={store.boards} onAdd={store.addBoard} />;
   }
 }
 

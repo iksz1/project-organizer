@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import style from "./AddCard.scss";
 
-class AddCard extends Component {
+export default class AddCard extends Component {
   static propTypes = {
-    handleAction: PropTypes.func
+    onSubmit: PropTypes.func
   };
 
   state = {
     inputValue: ""
   };
 
-  onInputChange = e => {
+  handleTextChange = e => {
     this.setState({ inputValue: e.target.value });
   };
 
-  onSubmit = () => {
-    this.props.handleAction(this.state.inputValue);
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state.inputValue);
     this.setState({ inputValue: "" });
   };
 
@@ -23,12 +25,12 @@ class AddCard extends Component {
     const { inputValue } = this.state;
 
     return (
-      <div>
-        <textarea name="text" rows="2" value={inputValue} onChange={this.onInputChange} required />
-        <button onClick={this.onSubmit}>submit</button>
+      <div className={style.addForm}>
+        <form onSubmit={this.handleSubmit}>
+          <textarea value={inputValue} onChange={this.handleTextChange} rows="2" />
+          <button type="submit">submit</button>
+        </form>
       </div>
     );
   }
 }
-
-export default AddCard;

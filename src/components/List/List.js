@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { observer } from "mobx-react";
 import style from "./List.scss";
 import Card from "../Card";
 import { Container, Draggable } from "react-smooth-dnd";
 import AddCard from "../AddCard";
-import { observer } from "mobx-react";
+import EditForm from "../EditForm";
+import EditIcon from "react-icons/lib/md/mode-edit";
+import DeleteIcon from "react-icons/lib/md/delete";
 
-// @inject("store")
 @observer
 class List extends Component {
   static propTypes = {
@@ -15,41 +17,63 @@ class List extends Component {
     onCardMove: PropTypes.func
   };
 
+  state = {
+    editMode: false
+  };
+
+  toggleEditMode = () => {
+    this.setState(prevState => ({ editMode: !prevState.editMode }));
+  };
+
+  handleUpdate = name => {
+    this.props.list.changeName(name);
+    this.toggleEditMode();
+  };
+
   onCardDrop = ({ addedIndex, payload }) => {
     const { list, onCardMove } = this.props;
     //same as (index !== null && index !== undefined)
     if (addedIndex != null) {
-      const { fromList, fromIndex, card } = payload;
-      console.log(`Received from list/index: ${fromList}/${fromIndex}`);
-      console.log(`Added to index: ${addedIndex}`);
-      // if (fromList === list.id && fromIndex === addedIndex) return; //exit if position hasn't changed
-      onCardMove(card, { fromList, fromIndex, toList: list.id, toIndex: addedIndex });
+      const { fromArr, fromIndex, card } = payload;
+      onCardMove(card, { fromArr, fromIndex, toArr: list.cards, toIndex: addedIndex });
     }
   };
 
   movingCardPayload = index => {
-    const list = this.props.list;
-    return { fromList: list.id, fromIndex: index, card: list.cards[index] };
+    const cards = this.props.list.cards;
+    return { fromArr: cards, fromIndex: index, card: cards[index] };
   };
 
   render() {
     const { list, onListDelete } = this.props;
-    // const cards = this.props.store.cards.filter(card => card.listId === list.id);
+    const editMode = this.state.editMode;
 
     return (
       <div className={style.list}>
-        <div className={style.header}>
-          {list.name}&nbsp;
-          <button onClick={() => list.changeName("kek")}>U</button>
-          <button onClick={() => onListDelete(list)}>X</button>
-        </div>
+        {!editMode && (
+          <div className={style.header}>
+            {list.name}
+            <div className={`${style.controls} dont-drag`}>
+              <button onClick={this.toggleEditMode}>
+                <EditIcon />
+              </button>
+              <button onClick={() => onListDelete(list)}>
+                <DeleteIcon />
+              </button>
+            </div>
+          </div>
+        )}
+        {editMode && (
+          <EditForm text={list.name} onSubmit={this.handleUpdate} onCancel={this.toggleEditMode} />
+        )}
         <div>
-          {/* <ul style={{ margin: 0, padding: 0, listStyle: "none" }}> */}
           <Container
             onDrop={this.onCardDrop}
             getChildPayload={this.movingCardPayload}
             dragClass={style.dragClass}
-            groupName="list"
+            groupName="cards"
+            dragBeginDelay={5}
+            nonDragAreaSelector=".dont-drag"
           >
             {list.cards.map(card => (
               <Draggable key={card.id}>
@@ -57,8 +81,7 @@ class List extends Component {
               </Draggable>
             ))}
           </Container>
-          <AddCard handleAction={list.addCard} />
-          {/* </ul> */}
+          <AddCard onSubmit={list.addCard} />
         </div>
       </div>
     );

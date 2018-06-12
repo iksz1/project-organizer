@@ -1,6 +1,7 @@
-import { types, flow, destroy } from "mobx-state-tree";
+import { types, flow, destroy, getParent } from "mobx-state-tree";
 import { List } from "./List";
 import db from "../utils/dbWrapper";
+import calcOrder from "../utils/reorderHelper";
 
 export const Board = types
   .model("Board", {
@@ -12,12 +13,16 @@ export const Board = types
   })
   .actions(self => ({
     changeName: flow(function* changeName(name) {
-      const board = yield db.update("boards", { ...self.toJSON(), name, lists: [] });
-      self.name = board.name;
+      yield db.update("boards", { id: self.id, name });
+      self.name = name;
     }),
 
     addList: flow(function* addList(name) {
-      const list = yield db.add("lists", { boardId: self.id, name, order: self.lists.length });
+      const list = yield db.add("lists", {
+        boardId: self.id,
+        name,
+        order: calcOrder({ toArr: self.lists })
+      });
       self.lists.push(list);
     }),
 
@@ -26,28 +31,40 @@ export const Board = types
       destroy(item);
     }),
 
-    moveCard(card, meta) {
-      const { fromList, fromIndex, toList, toIndex } = meta;
-      if (fromList === toList && fromIndex === toIndex) return; //exit if position hasn't changed
+    moveList: flow(function* moveList(listToMove, meta) {
+      const { fromIndex, toArr, toIndex } = meta;
+      if (fromIndex === toIndex) return; //exit if position hasn't changed
+      const order = calcOrder(meta);
+      const list = { ...listToMove, order, cards: listToMove.cards.map(card => ({ ...card })) };
+      yield db.update("lists", { id: list.id, order });
+      // const lists = toArr.slice();
+      toArr.splice(fromIndex, 1);
+      toArr.splice(toIndex, 0, list);
+      // lists.splice(toIndex, 0, lists.splice(fromIndex, 1)[0]);
+      // lists[toIndex] = list;
+      // toArr.replace(lists);
+    }),
 
-      if (fromList === toList) {
-        const list = self.lists.find(item => item.id === fromList);
-        const cards = list.cards.slice();
+    moveCard: flow(function* moveCard(cardToMove, meta) {
+      const { fromArr, fromIndex, toArr, toIndex } = meta;
+      if (fromArr === toArr && fromIndex === toIndex) return; //exit if position hasn't changed
+
+      if (fromArr === toArr) {
+        //same list scenario
+        const order = calcOrder(meta);
+        const card = { ...cardToMove, order };
+        yield db.update("cards", card);
+        const cards = toArr.slice();
         cards.splice(toIndex, 0, cards.splice(fromIndex, 1)[0]);
-
-        const tmp = cards.slice(fromIndex);
-        tmp.forEach((t, i) => (t.order = i + fromIndex));
-        cards.splice(fromIndex, tmp.length, ...tmp);
-
-        list.cards = cards;
+        cards[toIndex] = card;
+        toArr.replace(cards);
       } else {
-        self.lists[findIndex(self.lists, toList)].cards.splice(toIndex, 0, {
-          ...card,
-          listId: toList
-        });
-        self.lists[findIndex(self.lists, fromList)].cards.splice(fromIndex, 1);
+        //different lists scenario
+        const order = calcOrder(meta);
+        const card = { ...cardToMove, listId: getParent(toArr).id, order };
+        yield db.update("cards", card);
+        toArr.splice(toIndex, 0, card);
+        fromArr.splice(fromIndex, 1);
       }
-    }
+    })
   }));
-
-const findIndex = (arr, id) => arr.findIndex(item => item.id === id);

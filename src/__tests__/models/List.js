@@ -1,4 +1,7 @@
+import db from "../../utils/dbWrapper";
 import { List } from "../../models/List";
+
+jest.mock("../../utils/dbWrapper");
 
 const listData = {
   id: 1,
@@ -6,14 +9,16 @@ const listData = {
   name: "ideas"
 };
 
-it("creates instance successfully", () => {
+it("creates instance successfully", async () => {
   const list = List.create(listData);
-  list.changeName("features");
+  db.update.mockResolvedValue();
+  await list.changeName("features");
   expect(list.toJSON()).toMatchSnapshot();
 });
 
-it("can add a card", () => {
+it("can add a card", async () => {
   const list = List.create(listData);
-  list.addCard("add theming");
+  db.add = jest.fn((table, card) => Promise.resolve({ ...card, id: 1 }));
+  await list.addCard("add theming");
   expect(list.toJSON()).toMatchSnapshot();
 });
