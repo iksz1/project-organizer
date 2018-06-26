@@ -3,7 +3,7 @@
 exports[`creates instance successfully 1`] = `
 Object {
   "boardId": 1,
-  "deleted": false,
+  "deleted": 0,
   "id": 1,
   "labelId": 0,
   "listId": 1,

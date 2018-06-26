@@ -9,7 +9,7 @@ export const Board = types
     name: types.string,
     lists: types.optional(types.array(List), []),
     order: types.optional(types.number, 0),
-    deleted: types.optional(types.boolean, false)
+    deleted: types.optional(types.number, 0)
   })
   .actions(self => ({
     changeName: flow(function* changeName(name) {
@@ -26,9 +26,9 @@ export const Board = types
       self.lists.push(list);
     }),
 
-    deleteList: flow(function* deleteList(item) {
-      yield db.remove("lists", item.id);
-      destroy(item);
+    deleteList: flow(function* deleteList(list) {
+      yield db.remove("lists", list);
+      destroy(list);
     }),
 
     moveList: flow(function* moveList(listToMove, meta) {

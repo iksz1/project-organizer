@@ -21,6 +21,7 @@
     "no-empty": 0,
     "no-console": 1,
     "no-unused-vars": 1,
-    "react/prop-types": 1
+    "react/prop-types": 1,
+    "jsx-a11y/no-onchange": 0
   }
 }

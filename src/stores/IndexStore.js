@@ -1,9 +1,8 @@
-import { types, flow } from "mobx-state-tree";
+import { types, flow, destroy, getParent } from "mobx-state-tree";
 import { Board } from "../models/Board";
 import db from "../utils/dbWrapper";
-import makeInspectable from "mobx-devtools-mst";
 
-const BoardIndexStore = types
+const IndexStore = types
   .model("BoardIndexStore", {
     boards: types.optional(types.array(Board), []),
     isLoading: false
@@ -14,11 +13,16 @@ const BoardIndexStore = types
       self.boards.push(board);
     }),
 
+    deleteBoard: flow(function* deleteBoard(board) {
+      yield db.remove("boards", board);
+      destroy(board);
+    }),
+
     fetchData: flow(function* fetchData() {
       try {
         self.isLoading = true;
-        const boards = yield db.getAllBoards();
-        self.boards = boards;
+        self.boards = yield db.getAll("boards");
+        getParent(self).changeTitle("Board index");
       } catch (error) {
         console.error(error); //eslint-disable-line
       } finally {
@@ -27,4 +31,4 @@ const BoardIndexStore = types
     })
   }));
 
-export default makeInspectable(BoardIndexStore.create());
+export default IndexStore;

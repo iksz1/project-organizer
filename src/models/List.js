@@ -10,7 +10,7 @@ export const List = types
     name: types.string,
     cards: types.optional(types.array(Card), []),
     order: types.optional(types.number, 0),
-    deleted: types.optional(types.boolean, false)
+    deleted: types.optional(types.number, 0)
   })
   .actions(self => ({
     changeName: flow(function* changeName(name) {
@@ -28,8 +28,8 @@ export const List = types
       self.cards.push(card);
     }),
 
-    deleteCard: flow(function* deleteCard(item) {
-      yield db.remove("cards", item.id);
-      destroy(item);
+    deleteCard: flow(function* deleteCard(card) {
+      yield db.remove("cards", card);
+      destroy(card);
     })
   }));

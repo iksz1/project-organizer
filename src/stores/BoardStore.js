@@ -1,7 +1,6 @@
-import { types, flow } from "mobx-state-tree";
+import { types, flow, getParent } from "mobx-state-tree";
 import { Board } from "../models/Board";
 import db from "../utils/dbWrapper";
-import makeInspectable from "mobx-devtools-mst";
 
 const BoardStore = types
   .model("BoardStore", {
@@ -12,9 +11,10 @@ const BoardStore = types
     fetchData: flow(function* fetchData(boardId) {
       try {
         self.isLoading = true;
-        const data = yield db.getBoardRelated(boardId);
+        const data = yield db.getWithRelated("boards", boardId);
         if (data.boards[0]) {
           self.board = parseData(data);
+          getParent(self).changeTitle(self.board.name);
         }
       } catch (error) {
         console.error(error); //eslint-disable-line
@@ -30,7 +30,6 @@ const parseData = data => {
     cards: data.cards.filter(card => card.listId === list.id)
   }));
   return { ...data.boards[0], lists };
-  // return { board: { ...data.boards[0], lists } };
 };
 
-export default makeInspectable(BoardStore.create());
+export default BoardStore;

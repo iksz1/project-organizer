@@ -1,20 +1,18 @@
-import React, { Component, Fragment } from "react";
+import { Wrapper } from "./BoardView.sc";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import List from "../List/List";
-import style from "./BoardView.scss";
 import AddList from "../AddItem/AddItem";
 import { observer } from "mobx-react";
 import { Container, Draggable } from "react-smooth-dnd";
-import MainHeader from "../MainHeader/MainHeader";
 
-@observer
 class BoardView extends Component {
   static propTypes = {
-    board: PropTypes.object
+    store: PropTypes.object
   };
 
   onListDrop = ({ addedIndex, payload }) => {
-    const { board } = this.props;
+    const { board } = this.props.store;
     //same as (index !== null && index !== undefined)
     if (addedIndex != null) {
       const { fromArr, fromIndex, list } = payload;
@@ -23,38 +21,36 @@ class BoardView extends Component {
   };
 
   movingListPayload = index => {
-    const lists = this.props.board.lists;
+    const { lists } = this.props.store.board;
     return { fromArr: lists, fromIndex: index, list: lists[index] };
   };
 
   render() {
-    const board = this.props.board;
+    const { board } = this.props.store;
+    if (!board) return null;
 
     return (
-      <Fragment>
-        <MainHeader title={board ? board.name : ""} />
-        <div className={style.container}>
-          <Container
-            onDrop={this.onListDrop}
-            getChildPayload={this.movingListPayload}
-            dragClass={style.dragClass}
-            groupName="lists"
-            orientation="horizontal"
-            dragBeginDelay={5}
-            nonDragAreaSelector=".dont-drag"
-            dragHandleSelector=".List_header_g2fL6"
-          >
-            {board.lists.map(list => (
-              <Draggable key={list.id}>
-                <List list={list} onCardMove={board.moveCard} onListDelete={board.deleteList} />
-              </Draggable>
-            ))}
-          </Container>
-          <AddList onSubmit={board.addList} hint="add list" />
-        </div>
-      </Fragment>
+      <Wrapper>
+        <Container
+          onDrop={this.onListDrop}
+          getChildPayload={this.movingListPayload}
+          dragClass="drag-class"
+          groupName="lists"
+          orientation="horizontal"
+          dragBeginDelay={5}
+          dragHandleSelector=".list-header"
+          nonDragAreaSelector=".item-controls"
+        >
+          {board.lists.map(list => (
+            <Draggable key={list.id}>
+              <List list={list} onCardMove={board.moveCard} onListDelete={board.deleteList} />
+            </Draggable>
+          ))}
+        </Container>
+        <AddList onSubmit={board.addList} hint="add list" />
+      </Wrapper>
     );
   }
 }
 
-export default BoardView;
+export default observer(BoardView);

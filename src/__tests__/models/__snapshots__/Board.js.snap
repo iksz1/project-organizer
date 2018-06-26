@@ -2,13 +2,13 @@
 
 exports[`can add list 1`] = `
 Object {
-  "deleted": false,
+  "deleted": 0,
   "id": 1,
   "lists": Array [
     Object {
       "boardId": 1,
       "cards": Array [],
-      "deleted": false,
+      "deleted": 0,
       "id": 1,
       "name": "ideas",
       "order": 1,
@@ -21,13 +21,13 @@ Object {
 
 exports[`can move card 1`] = `
 Object {
-  "deleted": false,
+  "deleted": 0,
   "id": 1,
   "lists": Array [
     Object {
       "boardId": 1,
       "cards": Array [],
-      "deleted": false,
+      "deleted": 0,
       "id": 1,
       "name": "first",
       "order": 0,
@@ -37,7 +37,7 @@ Object {
       "cards": Array [
         Object {
           "boardId": 1,
-          "deleted": false,
+          "deleted": 0,
           "id": 1,
           "labelId": 0,
           "listId": 2,
@@ -45,7 +45,7 @@ Object {
           "text": "free card",
         },
       ],
-      "deleted": false,
+      "deleted": 0,
       "id": 2,
       "name": "second",
       "order": 0,
@@ -58,7 +58,7 @@ Object {
 
 exports[`creates instance successfully 1`] = `
 Object {
-  "deleted": false,
+  "deleted": 0,
   "id": 1,
   "lists": Array [],
   "name": "Project Kangaroo",

@@ -6,7 +6,7 @@ Object {
   "cards": Array [
     Object {
       "boardId": 1,
-      "deleted": false,
+      "deleted": 0,
       "id": 1,
       "labelId": 0,
       "listId": 1,
@@ -14,7 +14,7 @@ Object {
       "text": "add theming",
     },
   ],
-  "deleted": false,
+  "deleted": 0,
   "id": 1,
   "name": "ideas",
   "order": 0,
@@ -25,7 +25,7 @@ exports[`creates instance successfully 1`] = `
 Object {
   "boardId": 1,
   "cards": Array [],
-  "deleted": false,
+  "deleted": 0,
   "id": 1,
   "name": "features",
   "order": 0,

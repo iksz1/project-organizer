@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import style from "./Card.scss";
 import { observer } from "mobx-react";
-import EditForm from "./EditForm";
-import EditIcon from "react-icons/lib/md/mode-edit";
-import DeleteIcon from "react-icons/lib/md/delete";
+import styled from "styled-components";
+import { lighten } from "polished";
+import EditForm from "../EditForm/EditForm";
+import ItemControls from "../ItemControls/ItemControls";
 
-@observer
+export const CardWrapper = styled.div`
+  padding: 0.5em 1em;
+  margin: 0.2em 0;
+  position: relative;
+  background: ${props => lighten(0.05, props.theme.bgList)};
+  border-radius: 0.2em;
+  border: ${props => props.theme.border};
+  &:hover .item-controls {
+    display: block;
+  }
+`;
+
 class Card extends Component {
   static propTypes = {
     card: PropTypes.object,
@@ -19,10 +30,6 @@ class Card extends Component {
 
   toggleEditMode = () => {
     this.setState(prevState => ({ editMode: !prevState.editMode }));
-  };
-
-  handleDoubleClick = () => {
-    this.props.card.changeText("DOUBLE CLICKED!");
   };
 
   handleUpdate = text => {
@@ -41,19 +48,12 @@ class Card extends Component {
     }
 
     return (
-      <div className={style.card} onDoubleClick={this.handleDoubleClick}>
+      <CardWrapper className="card-wrapper">
         {card.text}
-        <div className={`${style.controls} dont-drag`}>
-          <button onClick={this.toggleEditMode}>
-            <EditIcon />
-          </button>
-          <button onClick={() => onCardDelete(card)}>
-            <DeleteIcon />
-          </button>
-        </div>
-      </div>
+        <ItemControls onEdit={this.toggleEditMode} onDelete={() => onCardDelete(card)} />
+      </CardWrapper>
     );
   }
 }
 
-export default Card;
+export default observer(Card);

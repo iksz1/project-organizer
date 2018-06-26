@@ -9,7 +9,7 @@ export const Card = types
     text: types.string,
     order: types.optional(types.number, 0),
     labelId: types.optional(types.number, 0),
-    deleted: types.optional(types.boolean, false)
+    deleted: types.optional(types.number, 0)
   })
   .actions(self => ({
     changeText: flow(function* changeText(text) {

@@ -1,15 +1,34 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { inject, observer } from "mobx-react";
 import { Link } from "react-router-dom";
-import style from "./MainHeader.scss";
+import styled from "styled-components";
 import BackIcon from "react-icons/lib/md/arrow-back";
 import TrashIcon from "react-icons/lib/md/delete";
 import SettingsIcon from "react-icons/lib/md/settings";
 
-export default class MainHeader extends Component {
+const Wrapper = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: none;
+  padding: 0.5em 1em;
+  background: ${props => props.theme.bgHeader};
+  color: ${props => props.theme.textLight};
+  box-shadow: ${props => props.theme.boxShadow};
+`;
+
+const MainHeaderNav = styled.div`
+  a {
+    color: inherit;
+    margin-left: 1em;
+  }
+`;
+const MainHeaderTitle = styled.div``;
+
+class MainHeader extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    showHomeBtn: PropTypes.bool
+    store: PropTypes.object
   };
 
   static defaultProps = {
@@ -17,27 +36,27 @@ export default class MainHeader extends Component {
   };
 
   render() {
-    const { title, showHomeBtn } = this.props;
+    const { title } = this.props.store;
 
     return (
-      <div className={style.container}>
-        <div>
-          {showHomeBtn && (
-            <Link to="/">
-              <BackIcon />
-            </Link>
-          )}&nbsp;
+      <Wrapper>
+        <MainHeaderTitle>
+          <Link to="/">
+            <BackIcon />
+          </Link>&nbsp;
           {title}
-        </div>
-        <div className={style.nav}>
-          <button>
-            <TrashIcon size="1.2em" />
-          </button>
-          <button>
-            <SettingsIcon size="1.2em" />
-          </button>
-        </div>
-      </div>
+        </MainHeaderTitle>
+        <MainHeaderNav>
+          <Link to="/trash">
+            <TrashIcon />
+          </Link>
+          <Link to="/settings">
+            <SettingsIcon />
+          </Link>
+        </MainHeaderNav>
+      </Wrapper>
     );
   }
 }
+
+export default inject("store")(observer(MainHeader));

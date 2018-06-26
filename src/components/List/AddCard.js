@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import style from "./AddCard.scss";
+import styled from "styled-components";
+import { Button, TextArea } from "../EditForm/EditForm";
+
+const Wrapper = styled.div`
+  margin-top: 0.2em;
+`;
 
 export default class AddCard extends Component {
   static propTypes = {
@@ -25,12 +30,18 @@ export default class AddCard extends Component {
     const { inputValue } = this.state;
 
     return (
-      <div className={style.addForm}>
+      <Wrapper>
         <form onSubmit={this.handleSubmit}>
-          <textarea value={inputValue} onChange={this.handleTextChange} rows="2" />
-          <button type="submit">submit</button>
+          <TextArea value={inputValue} onChange={this.handleTextChange} rows="2" />
+          <Button type="submit" disabled={inputValue ? false : true}>
+            submit
+          </Button>
+          {/* <textarea value={inputValue} onChange={this.handleTextChange} rows="2" />
+          <button type="submit" disabled={inputValue ? false : true}>
+            submit
+          </button> */}
         </form>
-      </div>
+      </Wrapper>
     );
   }
 }

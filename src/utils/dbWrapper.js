@@ -7,74 +7,162 @@ db.version(1).stores({
   cards: "++id, listId, boardId, deleted"
 });
 
+/**
+ * @param {string} table
+ * @param {number} id
+ */
 const get = (table, id) => {
   if (table && id) {
-    return db[table].get(+id).then(item => item);
+    return db[table].get({ id, deleted: 0 }).then(item => item);
     // return db[table].where({ id: 1 }).first();
   }
 };
 
+/**
+ * @param {string} table
+ * @param {Object} item Object conta
+ */
 const add = (table, item) => {
-  // return update(table, { ...item, deleted: false });
+  // return update(table, { ...item, deleted: 0 });
   if (table && item) {
-    return db[table].add({ ...item, deleted: false }).then(id => get(table, id));
+    return db[table].add({ ...item, deleted: 0 }).then(id => get(table, id));
   }
 };
 
+/**
+ * @param {string} table
+ * @param {Object} item
+ */
 const update = (table, item) => {
   if (table && item) {
     return db[table].update(item.id, item);
   }
 };
 
-const bulkPut = (table, items) => {
-  if (table && items) {
-    return db[table].bulkPut(items);
+/**
+ * @param {string} table
+ * @param {Object} item
+ */
+const remove = (table, item) => {
+  if (table && item.id) {
+    if (item.deleted === 0) {
+      return moveToTrash(table, item.id);
+    }
+    return deleteWithRelated(table, item.id);
   }
 };
 
-const remove = (table, id) => {
-  if (table && id) {
-    return get(table, id).then(item => {
-      if (item.deleted) {
-        // db[table].delete(id); //need to delete related data
-        console.log(`item ${table}[${id}] deleted permanently (NO)`); //eslint-disable-line
-      } else {
-        update(table, { ...item, deleted: true });
-      }
-    });
+/**
+ * Move item to the trash.
+ * @param {string} table
+ * @param {number} id
+ */
+const moveToTrash = (table, id) => {
+  switch (table) {
+    case "cards":
+      return db.cards.update(id, { deleted: 1 });
+    case "lists":
+      return db.lists.update(id, { deleted: 1 });
+    case "boards":
+      return db.boards.update(id, { deleted: 1 });
   }
 };
 
-const getAllBoards = () => {
-  // return db.boards.where({ deleted: false }).sortBy("order");
-  return db.boards
-    .orderBy(":id")
-    .filter(board => !board.deleted)
-    .sortBy("order");
+/**
+ * Permanently delete item and related data.
+ * @param {string} table
+ * @param {number} id
+ */
+const deleteWithRelated = (table, id) => {
+  switch (table) {
+    case "cards":
+      return db.cards.delete(id);
+    case "lists":
+      return Promise.all([db.lists.delete(id), db.cards.where({ listId: id }).delete()]);
+    case "boards":
+      return Promise.all([
+        db.boards.delete(id),
+        db.lists.where({ boardId: id }).delete(),
+        db.cards.where({ boardId: id }).delete()
+      ]);
+  }
 };
 
-const getListsByBoard = boardId => {
-  return db.lists.where({ boardId, deleted: false }).sortBy("order");
+/**
+ * Restore trashed item.
+ * @param {string} table
+ * @param {number} id
+ */
+const restore = (table, id) => {
+  switch (table) {
+    case "cards":
+      return db.cards.update(id, { deleted: 0 });
+    case "lists":
+      return db.lists.update(id, { deleted: 0 });
+    case "boards":
+      return db.boards.update(id, { deleted: 0 });
+  }
 };
 
-// const getCardsByList = listId => {
-//   return db.cards.where({ id: listId, deleted: false }).sortBy("order");
-// };
-
-const getCardsByBoard = boardId => {
-  return db.cards.where({ boardId, deleted: false }).sortBy("order");
+/**
+ * Get all items (excluding trashed) of the table.
+ * @param {string} table
+ */
+const getAll = table => {
+  return db[table].where({ deleted: 0 }).sortBy("order");
 };
 
-const getBoardRelated = id => {
+/**
+ * Get item with related data.
+ * @param {string} table
+ * @param {number} id
+ */
+const getWithRelated = (table, id) => {
   id = +id;
-  return Promise.all([get("boards", id), getListsByBoard(id), getCardsByBoard(id)]).then(
-    values => ({
-      boards: values[0] ? [values[0]] : [],
-      lists: values[1],
-      cards: values[2]
-    })
-  );
+  switch (table) {
+    case "boards":
+      return Promise.all([
+        get(table, id),
+        db.lists.where({ boardId: id, deleted: 0 }).sortBy("order"),
+        db.cards.where({ boardId: id, deleted: 0 }).sortBy("order")
+      ]).then(values => ({
+        boards: values[0] ? [values[0]] : [],
+        lists: values[1],
+        cards: values[2]
+      }));
+    case "lists":
+      return Promise.all([
+        get(table, id),
+        db.cards.where({ listId: id, deleted: 0 }).sortBy("order")
+      ]).then(values => ({
+        lists: values[0] ? [values[0]] : [],
+        cards: values[1]
+      }));
+  }
 };
 
-export default { get, add, update, remove, bulkPut, getAllBoards, getBoardRelated };
+/**
+ * Get all trashed items. Related items are not included.
+ */
+const getTrashed = () => {
+  return Promise.all([
+    db.boards.where({ deleted: 1 }).toArray(),
+    db.lists.where({ deleted: 1 }).toArray(),
+    db.cards.where({ deleted: 1 }).toArray()
+  ]).then(values => ({
+    boards: values[0],
+    lists: values[1],
+    cards: values[2]
+  }));
+};
+
+export default {
+  get,
+  add,
+  update,
+  remove,
+  restore,
+  getAll,
+  getWithRelated,
+  getTrashed
+};
