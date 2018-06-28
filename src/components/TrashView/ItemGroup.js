@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-import ItemControls from "../ItemControls/ItemControls";
-import { ListWrapper, ListHeader } from "../List/List";
-import { CardWrapper } from "../Card/Card";
+import ItemControls from "../UI/ItemControls/ItemControls";
+import { ListWrapper, ListHeader } from "../UI/List/List";
+import { CardWrapper } from "../UI/Card/Card";
 
 class ItemGroup extends Component {
   static propTypes = {
     name: PropTypes.string,
-    items: PropTypes.object,
+    items: PropTypes.array,
     onDelete: PropTypes.func,
     onRestore: PropTypes.func
   };

@@ -41,16 +41,16 @@ class MainHeader extends Component {
     return (
       <Wrapper>
         <MainHeaderTitle>
-          <Link to="/">
+          <Link to="/" aria-label="Index">
             <BackIcon />
           </Link>&nbsp;
           {title}
         </MainHeaderTitle>
         <MainHeaderNav>
-          <Link to="/trash">
+          <Link to="/trash" aria-label="Trash">
             <TrashIcon />
           </Link>
-          <Link to="/settings">
+          <Link to="/settings" aria-label="Settings">
             <SettingsIcon />
           </Link>
         </MainHeaderNav>

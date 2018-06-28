@@ -4,8 +4,8 @@ import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import { lighten } from "polished";
 import styled from "styled-components";
-import EditForm from "../EditForm/EditForm";
-import ItemControls from "../ItemControls/ItemControls";
+import EditForm from "../UI/EditForm/EditForm";
+import ItemControls from "../UI/ItemControls/ItemControls";
 
 const Wrapper = styled.div`
   position: relative;

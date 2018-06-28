@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 import IndexView from "./IndexView/IndexView";
 
-class Index extends Component {
+class BoardIndex extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired
   };
@@ -20,4 +20,4 @@ class Index extends Component {
   }
 }
 
-export default inject("store")(observer(Index));
+export default inject("store")(observer(BoardIndex));

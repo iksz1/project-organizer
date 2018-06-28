@@ -2,7 +2,7 @@ import { Wrapper, StyledList, StyledListItem } from "./IndexView.sc";
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-import AddItem from "../AddItem/AddItem";
+import AddItem from "../UI/AddItem/AddItem";
 import ListItem from "./ListItem";
 
 class IndexView extends Component {

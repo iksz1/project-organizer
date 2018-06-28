@@ -14,7 +14,7 @@ const appear = keyframes`
 export const Wrapper = styled.div`
   flex: auto;
   overflow: auto;
-  margin: 0.5em;
+  padding: 0.5em;
   will-change: transform, opacity;
   animation: ${appear} 1s ease;
   animation-delay: 200ms;

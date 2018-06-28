@@ -14,7 +14,6 @@ db.version(1).stores({
 const get = (table, id) => {
   if (table && id) {
     return db[table].get({ id, deleted: 0 }).then(item => item);
-    // return db[table].where({ id: 1 }).first();
   }
 };
 
@@ -23,7 +22,6 @@ const get = (table, id) => {
  * @param {Object} item Object conta
  */
 const add = (table, item) => {
-  // return update(table, { ...item, deleted: 0 });
   if (table && item) {
     return db[table].add({ ...item, deleted: 0 }).then(id => get(table, id));
   }

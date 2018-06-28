@@ -1,6 +1,6 @@
 {
   "presets": [
-    ["@babel/env", { "targets": { "chrome": 48 }, "useBuiltIns": "usage", "modules": false }],
+    ["@babel/env", { "targets": { "chrome": 52 }, "useBuiltIns": false, "modules": false }],
     ["@babel/stage-2", { "decoratorsLegacy": true }],
     "@babel/react"
   ],
@@ -10,7 +10,7 @@
       {
         "helpers": false,
         "polyfill": false,
-        "regenerator": true,
+        "regenerator": false,
         "moduleName": "@babel/runtime"
       }
     ]

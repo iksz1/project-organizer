@@ -5,7 +5,7 @@ import ItemGroup from "./ItemGroup";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  margin: 0.5em;
+  padding: 0.5em;
 `;
 
 class TrashView extends Component {
@@ -28,9 +28,6 @@ class TrashView extends Component {
             onRestore={restoreItem}
           />
         ))}
-        {/* <Table name="boards" items={boards} onDelete={deleteItem} onRestore={restoreItem} />
-        <Table name="lists" items={lists} onDelete={deleteItem} onRestore={restoreItem} />
-        <Table name="cards" items={cards} onDelete={deleteItem} onRestore={restoreItem} /> */}
       </Wrapper>
     );
   }

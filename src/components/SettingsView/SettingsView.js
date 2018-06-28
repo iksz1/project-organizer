@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { ListWrapper, ListHeader } from "../List/List";
-import { CardWrapper } from "../Card/Card";
+import { ListWrapper, ListHeader } from "../UI/List/List";
+import { CardWrapper } from "../UI/Card/Card";
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 0.5em;
+  padding: 0.5em;
 `;
 
 const ListItem = CardWrapper.extend`

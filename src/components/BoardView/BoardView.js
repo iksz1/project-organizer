@@ -1,8 +1,8 @@
 import { Wrapper } from "./BoardView.sc";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import List from "../List/List";
-import AddList from "../AddItem/AddItem";
+import List from "../UI/List/List";
+import AddList from "../UI/AddItem/AddItem";
 import { observer } from "mobx-react";
 import { Container, Draggable } from "react-smooth-dnd";
 

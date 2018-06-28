@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { observer, inject } from "mobx-react";
-import Index from "../Index";
+import BoardIndex from "../BoardIndex";
 import Board from "../Board";
 import Trash from "../Trash";
 import Settings from "../Settings";
@@ -66,7 +66,7 @@ class App extends Component {
                 <Route exact path="/boards/:boardId" component={Board} />
                 <Route exact path="/trash" component={Trash} />
                 <Route exact path="/settings" component={Settings} />
-                <Route component={Index} />
+                <Route component={BoardIndex} />
               </Switch>
             </main>
           </Wrapper>
