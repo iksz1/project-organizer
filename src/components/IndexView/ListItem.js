@@ -50,7 +50,11 @@ class ListItem extends Component {
     const editMode = this.state.editMode;
 
     if (editMode) {
-      return <EditForm text={name} onSubmit={this.handleUpdate} onCancel={this.toggleEditMode} />;
+      return (
+        <Wrapper>
+          <EditForm text={name} onSubmit={this.handleUpdate} onCancel={this.toggleEditMode} />
+        </Wrapper>
+      );
     }
 
     return (

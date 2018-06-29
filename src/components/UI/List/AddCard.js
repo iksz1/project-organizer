@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { Button, TextArea } from "../EditForm/EditForm";
-
-const Wrapper = styled.div`
-  margin-top: 0.2em;
-`;
 
 export default class AddCard extends Component {
   static propTypes = {
@@ -30,14 +25,14 @@ export default class AddCard extends Component {
     const { inputValue } = this.state;
 
     return (
-      <Wrapper>
+      <div>
         <form onSubmit={this.handleSubmit}>
           <TextArea value={inputValue} onChange={this.handleTextChange} rows="2" />
           <Button type="submit" disabled={inputValue ? false : true}>
             submit
           </Button>
         </form>
-      </Wrapper>
+      </div>
     );
   }
 }

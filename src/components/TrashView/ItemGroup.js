@@ -5,6 +5,12 @@ import ItemControls from "../UI/ItemControls/ItemControls";
 import { ListWrapper, ListHeader } from "../UI/List/List";
 import { CardWrapper } from "../UI/Card/Card";
 
+const ItemWrapper = CardWrapper.extend`
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 class ItemGroup extends Component {
   static propTypes = {
     name: PropTypes.string,
@@ -22,14 +28,14 @@ class ItemGroup extends Component {
       <ListWrapper>
         <ListHeader centered>{name.toUpperCase()}</ListHeader>
         {items.map(item => (
-          <CardWrapper key={item.id}>
+          <ItemWrapper key={item.id}>
             {item.name || item.text}
             <ItemControls
               onRestore={() => onRestore(item)}
               onDelete={() => onDelete(item)}
               btnSize="1.2em"
             />
-          </CardWrapper>
+          </ItemWrapper>
         ))}
       </ListWrapper>
     );

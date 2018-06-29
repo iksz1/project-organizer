@@ -12,6 +12,7 @@ const appear = keyframes`
 `;
 
 export const Wrapper = styled.div`
+  display: flex;
   flex: auto;
   overflow: auto;
   padding: 0.5em;

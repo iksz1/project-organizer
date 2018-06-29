@@ -1,7 +1,7 @@
-import { Wrapper, StyledList, StyledListItem } from "./IndexView.sc";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
+import { Wrapper, MainBlock, BoardList } from "./IndexView.sc";
 import AddItem from "../UI/AddItem/AddItem";
 import ListItem from "./ListItem";
 
@@ -14,18 +14,18 @@ class IndexView extends Component {
     const { boards, addBoard, deleteBoard } = this.props.store;
 
     return (
-      <Fragment>
+      <Wrapper>
         <AddItem onSubmit={addBoard} hint="add board" />
-        <Wrapper>
-          <StyledList>
+        <MainBlock>
+          <BoardList>
             {boards.map(board => (
-              <StyledListItem key={board.id}>
+              <li key={board.id}>
                 <ListItem board={board} onDelete={deleteBoard} />
-              </StyledListItem>
+              </li>
             ))}
-          </StyledList>
-        </Wrapper>
-      </Fragment>
+          </BoardList>
+        </MainBlock>
+      </Wrapper>
     );
   }
 }

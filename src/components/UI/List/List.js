@@ -20,7 +20,7 @@ export const ListWrapper = styled.div`
 export const ListHeader = styled.div`
   position: relative;
   padding: 0.5em 1em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.5em;
   text-align: ${props => (props.centered ? "center" : "inherit")};
   background: ${props => props.theme.bgHeader};
   color: ${props => props.theme.textLight};
@@ -77,7 +77,13 @@ class List extends Component {
           </ListHeader>
         )}
         {editMode && (
-          <EditForm text={list.name} onSubmit={this.handleUpdate} onCancel={this.toggleEditMode} />
+          <ListHeader>
+            <EditForm
+              text={list.name}
+              onSubmit={this.handleUpdate}
+              onCancel={this.toggleEditMode}
+            />
+          </ListHeader>
         )}
         <Container
           onDrop={this.onCardDrop}

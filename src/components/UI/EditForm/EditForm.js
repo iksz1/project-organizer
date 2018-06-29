@@ -4,13 +4,15 @@ import styled from "styled-components";
 import { lighten, darken } from "polished";
 
 const Wrapper = styled.div`
-  margin-top: 0.2em;
+  text-align: left;
 `;
 
 export const Button = styled.button`
+  padding: 1px 6px;
   background: ${props => props.theme.bgExtra};
-  border: 1px solid ${props => props.theme.bgExtra};
   color: ${props => lighten(0.1, props.theme.bgList)};
+  font-size: 1.3rem;
+  border: none;
   border-radius: 2px;
   &:hover {
     background: ${props => darken(0.05, props.theme.bgExtra)};
@@ -20,6 +22,8 @@ export const Button = styled.button`
 export const TextArea = styled.textarea`
   width: 100%;
   resize: vertical;
+  overflow-x: hidden;
+  color: ${props => props.theme.text};
   background: ${props => lighten(0.1, props.theme.bgList)};
   border: ${props => props.theme.borderInput};
   border-radius: 0.2em;

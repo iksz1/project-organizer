@@ -8,7 +8,7 @@ import ItemControls from "../ItemControls/ItemControls";
 
 export const CardWrapper = styled.div`
   padding: 0.5em 1em;
-  margin: 0.2em 0;
+  margin-bottom: 0.5em;
   position: relative;
   background: ${props => lighten(0.05, props.theme.bgList)};
   border-radius: 0.2em;
@@ -43,7 +43,9 @@ class Card extends Component {
 
     if (editMode) {
       return (
-        <EditForm text={card.text} onSubmit={this.handleUpdate} onCancel={this.toggleEditMode} />
+        <CardWrapper>
+          <EditForm text={card.text} onSubmit={this.handleUpdate} onCancel={this.toggleEditMode} />
+        </CardWrapper>
       );
     }
 

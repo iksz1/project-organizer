@@ -4,22 +4,26 @@ import { lighten } from "polished";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  margin: 1em;
+  margin: 0.5em;
 `;
 
 const AddItemForm = styled.form`
-  & input {
+  display: flex;
+  input {
     padding: 0.5em;
     background: ${props => lighten(0.1, props.theme.bgList)};
     border: ${props => props.theme.borderInput};
-    border-radius: 0.2em;
+    border-top-left-radius: 0.2em;
+    border-bottom-left-radius: 0.2em;
+    border-right: none;
   }
-  & button {
+  button {
     padding: 0.5em;
     background-color: ${props => props.theme.bgHeader};
-    border: 1px solid ${props => props.theme.bgHeader};
+    border: none;
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
     color: ${props => props.theme.textLight};
-    border-radius: 0.2em;
   }
 `;
 

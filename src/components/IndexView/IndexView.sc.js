@@ -12,6 +12,10 @@ const appear = keyframes`
 `;
 
 export const Wrapper = styled.div`
+  padding: 0.5em;
+`;
+
+export const MainBlock = styled.div`
   display: flex;
   justify-content: center;
   padding: 1em;
@@ -21,7 +25,7 @@ export const Wrapper = styled.div`
   animation-fill-mode: backwards;
 `;
 
-export const StyledList = styled.ul`
+export const BoardList = styled.ul`
   margin: 0;
   padding: 0;
   width: 300px;
@@ -35,14 +39,4 @@ export const StyledList = styled.ul`
       text-decoration: none;
     }
   }
-`;
-
-export const StyledListItem = styled.li`
-  /* margin: 1em 0;
-  box-shadow: ${props => props.theme.boxShadow};
-  & a:link,
-  a:visited {
-    color: inherit;
-    text-decoration: none;
-  } */
 `;

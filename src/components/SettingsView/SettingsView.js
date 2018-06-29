@@ -12,6 +12,9 @@ const Wrapper = styled.div`
 
 const ListItem = CardWrapper.extend`
   padding: 1em;
+  &:last-child {
+    margin-bottom: 0;
+  }
   select {
     width: 100%;
     padding: 0.5em;

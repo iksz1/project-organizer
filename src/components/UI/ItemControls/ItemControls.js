@@ -5,6 +5,7 @@ import EditIcon from "react-icons/lib/md/mode-edit";
 import DeleteIcon from "react-icons/lib/md/delete";
 import RestoreIcon from "react-icons/lib/md/replay";
 // import RemoveIcon from "react-icons/lib/md/highlight-remove";
+// import RemoveIcon from "react-icons/lib/go/x";
 
 const Wrapper = styled.div`
   display: none;
@@ -14,6 +15,7 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
+  padding: 1px 4px;
   background: none;
   border: none;
   color: inherit;

@@ -35,6 +35,9 @@ injectGlobal`
   select {
     color: inherit;
   }
+  button {
+    font-family: inherit;
+  }
   .drag-class {
     opacity: 0.5;
   }
