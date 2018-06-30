@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { lighten, darken } from "polished";
+import { lighten } from "polished";
 
 const Wrapper = styled.div`
   text-align: left;
@@ -9,13 +9,14 @@ const Wrapper = styled.div`
 
 export const Button = styled.button`
   padding: 1px 6px;
+  line-height: 1.6rem;
   background: ${props => props.theme.bgExtra};
-  color: ${props => lighten(0.1, props.theme.bgList)};
+  color: ${props => props.theme.textLight};
   font-size: 1.3rem;
   border: none;
   border-radius: 2px;
   &:hover {
-    background: ${props => darken(0.05, props.theme.bgExtra)};
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
   }
 `;
 
