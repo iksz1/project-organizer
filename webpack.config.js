@@ -9,8 +9,7 @@ const autoprefixer = require("autoprefixer");
 //https://webpack.js.org/plugins/html-webpack-plugin/
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "public/index.html",
-  favicon: "public/favicon.ico",
-  // filename: "index.html",
+  favicon: "public/favicon.png",
   minify: {
     removeComments: true,
     collapseWhitespace: true,
