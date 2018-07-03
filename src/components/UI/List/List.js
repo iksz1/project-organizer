@@ -9,7 +9,7 @@ import EditForm from "../EditForm/EditForm";
 import ItemControls from "../ItemControls/ItemControls";
 
 export const ListWrapper = styled.div`
-  width: 300px;
+  width: 30rem;
   margin: 0.5em;
   padding: 0.5em;
   background: ${props => props.theme.bgList};
@@ -95,7 +95,7 @@ class List extends Component {
           nonDragAreaSelector=".item-controls"
         >
           {list.cards.map(card => (
-            <Draggable key={card.id}>
+            <Draggable key={card.id} style={{ overflow: "inherit" }}>
               <Card key={card.id} card={card} onCardDelete={list.deleteCard} />
             </Draggable>
           ))}

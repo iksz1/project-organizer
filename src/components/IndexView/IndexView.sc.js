@@ -30,13 +30,8 @@ export const BoardList = styled.ul`
   padding: 0;
   width: 300px;
   list-style: none;
-  li {
-    margin: 1em 0;
-    box-shadow: ${props => props.theme.boxShadow};
-    a:link,
-    a:visited {
-      color: inherit;
-      text-decoration: none;
-    }
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 `;

@@ -4,7 +4,7 @@ Project data is stored locally in IndexedDB.
 
 Demo: [https://organizer.netlify.com/](https://organizer.netlify.com/)
 
-[![app.png](https://s33.postimg.cc/mezfuza4f/app.png)](https://postimg.cc/image/tuypgrxtn/)
+[![app.png](https://s33.postimg.cc/vcida2e2n/app.png)](https://postimg.cc/image/5tq0x1uij/)
 
 ### Packages used
 

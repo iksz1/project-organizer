@@ -12,7 +12,7 @@ export const CardWrapper = styled.div`
   position: relative;
   background: ${props => lighten(0.05, props.theme.bgList)};
   border-radius: 0.2em;
-  border: ${props => props.theme.border};
+  box-shadow: ${props => props.theme.boxShadowAlt};
   &:hover .item-controls {
     display: block;
   }
