@@ -30,8 +30,4 @@ export const BoardList = styled.ul`
   padding: 0;
   width: 300px;
   list-style: none;
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
 `;

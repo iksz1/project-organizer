@@ -1,25 +1,28 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-import { lighten } from "polished";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import EditForm from "../UI/EditForm/EditForm";
-import ItemControls from "../UI/ItemControls/ItemControls";
+import PopupButtons from "../UI/PopupButtons/PopupButtons";
 
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
   margin: 1em 0;
   padding: 1em;
-  background: ${props => lighten(0.05, props.theme.bgList)};
+  background: ${props => props.theme.bgCard};
   box-shadow: ${props => props.theme.boxShadow};
   border-radius: 0.2em;
   text-align: center;
+  word-wrap: break-word;
+`;
+
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
   &:hover {
-    background: ${props => props.theme.bgList};
-    .item-controls {
-      display: block;
-    }
+    font-weight: 500;
   }
 `;
 
@@ -50,8 +53,12 @@ class ListItem extends Component {
   };
 
   render() {
-    const { name } = this.props.board;
+    const { id, name } = this.props.board;
     const editMode = this.state.editMode;
+    const popupItems = [
+      { handler: this.toggleEditMode, icon: "edit" },
+      { handler: this.handleDelete, icon: "trash" }
+    ];
 
     if (editMode) {
       return (
@@ -62,10 +69,12 @@ class ListItem extends Component {
     }
 
     return (
-      <Wrapper>
-        {name}
-        <ItemControls onEdit={this.toggleEditMode} onDelete={this.handleDelete} />
-      </Wrapper>
+      <StyledLink to={`/boards/${id}`}>
+        <Wrapper className="with-popup">
+          {name}
+          <PopupButtons items={popupItems} />
+        </Wrapper>
+      </StyledLink>
     );
   }
 }

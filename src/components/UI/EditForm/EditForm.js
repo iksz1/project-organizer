@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { lighten } from "polished";
 
 const Wrapper = styled.div`
   text-align: left;
@@ -9,9 +8,9 @@ const Wrapper = styled.div`
 
 export const Button = styled.button`
   padding: 1px 6px;
-  line-height: 1.6rem;
+  line-height: 1.5rem;
   background: ${props => props.theme.bgExtra};
-  color: ${props => props.theme.textLight};
+  color: ${props => props.theme.textAlt};
   font-size: 1.3rem;
   border: none;
   border-radius: 2px;
@@ -22,10 +21,11 @@ export const Button = styled.button`
 
 export const TextArea = styled.textarea`
   width: 100%;
+  padding: 0 2px;
   resize: vertical;
   overflow-x: hidden;
   color: ${props => props.theme.text};
-  background: ${props => lighten(0.1, props.theme.bgList)};
+  background: ${props => props.theme.bgInput};
   border: ${props => props.theme.borderInput};
   border-radius: 0.2em;
 `;
@@ -55,6 +55,7 @@ export default class EditForm extends Component {
 
   render() {
     const text = this.state.text;
+    const { onCancel } = this.props;
 
     return (
       <Wrapper>
@@ -63,7 +64,9 @@ export default class EditForm extends Component {
           <Button type="submit" disabled={text ? false : true}>
             submit
           </Button>&nbsp;
-          <Button onClick={this.props.onCancel}>cancel</Button>
+          <Button type="button" onClick={onCancel}>
+            cancel
+          </Button>
         </form>
       </Wrapper>
     );

@@ -2,7 +2,7 @@
   "name": "ppo",
   "version": "0.0.1",
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot --open",
+    "start": "webpack-dev-server --mode development --hot --open chrome",
     "build": "webpack --mode production",
     "test": "jest"
   },

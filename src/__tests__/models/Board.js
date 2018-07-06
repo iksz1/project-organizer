@@ -22,6 +22,25 @@ it("can add list", async () => {
   expect(board.toJSON()).toMatchSnapshot();
 });
 
+it("can move list", async () => {
+  const lists = [
+    { id: 1, boardId: 1, name: "first", order: 1 },
+    { id: 2, boardId: 1, name: "second", order: 2 },
+    { id: 3, boardId: 1, name: "third", order: 3 }
+  ];
+  const board = Board.create({ ...boardData, lists });
+  const meta = {
+    fromArr: board.lists,
+    fromIndex: 0,
+    toArr: board.lists,
+    toIndex: 2
+  };
+
+  db.update.mockResolvedValue();
+  await board.moveList(board.lists[0], meta);
+  expect(board.toJSON()).toMatchSnapshot();
+});
+
 it("can move card", async () => {
   const card = { id: 1, listId: 1, boardId: 1, text: "free card" };
   const lists = [

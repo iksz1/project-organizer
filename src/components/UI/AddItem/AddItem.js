@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { lighten } from "polished";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -11,7 +10,7 @@ const AddItemForm = styled.form`
   display: flex;
   input {
     padding: 0.5em;
-    background: ${props => lighten(0.1, props.theme.bgList)};
+    background: ${props => props.theme.bgInput};
     border: ${props => props.theme.borderInput};
     border-top-left-radius: 0.2em;
     border-bottom-left-radius: 0.2em;
@@ -23,7 +22,7 @@ const AddItemForm = styled.form`
     border: none;
     border-top-right-radius: 0.2em;
     border-bottom-right-radius: 0.2em;
-    color: ${props => props.theme.textLight};
+    color: ${props => props.theme.textAlt};
   }
 `;
 

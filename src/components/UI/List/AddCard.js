@@ -28,9 +28,7 @@ export default class AddCard extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <TextArea value={inputValue} onChange={this.handleTextChange} rows="2" />
-          <Button type="submit" disabled={inputValue ? false : true}>
-            submit
-          </Button>
+          {inputValue && <Button type="submit">submit</Button>}
         </form>
       </div>
     );

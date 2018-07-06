@@ -15,7 +15,7 @@ const Wrapper = styled.header`
   font-size: 1.6rem;
   padding: 0.5em 1em;
   background: ${props => props.theme.bgHeader};
-  color: ${props => props.theme.textLight};
+  color: ${props => props.theme.textAlt};
   box-shadow: ${props => props.theme.boxShadow};
   a {
     color: inherit;

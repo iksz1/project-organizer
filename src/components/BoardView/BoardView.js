@@ -27,6 +27,7 @@ class BoardView extends Component {
 
   render() {
     const { board } = this.props.store;
+
     if (!board) return null;
 
     return (
@@ -38,8 +39,8 @@ class BoardView extends Component {
           groupName="lists"
           orientation="horizontal"
           dragBeginDelay={5}
-          dragHandleSelector=".list-header"
-          nonDragAreaSelector=".item-controls"
+          dragHandleSelector=".draggable"
+          nonDragAreaSelector=".non-draggable"
         >
           {board.lists.map(list => (
             <Draggable key={list.id}>

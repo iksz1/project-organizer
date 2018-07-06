@@ -2,20 +2,17 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 import styled from "styled-components";
-import { lighten } from "polished";
 import EditForm from "../EditForm/EditForm";
-import ItemControls from "../ItemControls/ItemControls";
+import PopupButtons from "../PopupButtons/PopupButtons";
 
-export const CardWrapper = styled.div`
+export const Wrapper = styled.div`
   padding: 0.5em 1em;
   margin-bottom: 0.5em;
   position: relative;
-  background: ${props => lighten(0.05, props.theme.bgList)};
+  background: ${props => props.theme.bgCard};
   border-radius: 0.2em;
   box-shadow: ${props => props.theme.boxShadowAlt};
-  &:hover .item-controls {
-    display: block;
-  }
+  word-wrap: break-word;
 `;
 
 class Card extends Component {
@@ -40,20 +37,24 @@ class Card extends Component {
   render() {
     const { card, onCardDelete } = this.props;
     const editMode = this.state.editMode;
+    const popupItems = [
+      { handler: this.toggleEditMode, icon: "edit" },
+      { handler: () => onCardDelete(card), icon: "trash" }
+    ];
 
     if (editMode) {
       return (
-        <CardWrapper>
+        <Wrapper>
           <EditForm text={card.text} onSubmit={this.handleUpdate} onCancel={this.toggleEditMode} />
-        </CardWrapper>
+        </Wrapper>
       );
     }
 
     return (
-      <CardWrapper className="card-wrapper">
+      <Wrapper className="draggable with-popup">
         {card.text}
-        <ItemControls onEdit={this.toggleEditMode} onDelete={() => onCardDelete(card)} />
-      </CardWrapper>
+        <PopupButtons items={popupItems} />
+      </Wrapper>
     );
   }
 }

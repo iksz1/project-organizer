@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-import ItemControls from "../UI/ItemControls/ItemControls";
-import { ListWrapper, ListHeader } from "../UI/List/List";
-import { CardWrapper } from "../UI/Card/Card";
+import PopupButtons from "../UI/PopupButtons/PopupButtons";
+import { Wrapper, ListHeader } from "../UI/List/List";
+import { Wrapper as CardWrapper } from "../UI/Card/Card";
 
 const ItemWrapper = CardWrapper.extend`
   &:last-child {
@@ -25,19 +25,21 @@ class ItemGroup extends Component {
     if (items.length === 0) return null;
 
     return (
-      <ListWrapper>
+      <Wrapper>
         <ListHeader centered>{name.toUpperCase()}</ListHeader>
         {items.map(item => (
-          <ItemWrapper key={item.id}>
+          <ItemWrapper key={item.id} className="with-popup">
             {item.name || item.text}
-            <ItemControls
-              onRestore={() => onRestore(item)}
-              onDelete={() => onDelete(item)}
+            <PopupButtons
+              items={[
+                { handler: () => onRestore(item), icon: "restore" },
+                { handler: () => onDelete(item), icon: "remove" }
+              ]}
               btnSize="1.2em"
             />
           </ItemWrapper>
         ))}
-      </ListWrapper>
+      </Wrapper>
     );
   }
 }

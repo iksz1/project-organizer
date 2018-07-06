@@ -4,25 +4,6 @@ import { Board } from "../models/Board";
 import { List } from "../models/List";
 import { Card } from "../models/Card";
 
-// const TrashItem = types.model("TrashItem", {
-//   id: types.number,
-//   listId: types.maybe(types.number),
-//   boardId: types.maybe(types.number),
-//   text: types.maybe(types.string),
-//   name: types.maybe(types.string),
-//   deleted: types.number
-// });
-
-// const TrashItemCollection = types.model("TrashItemCollection", {
-//   name: types.identifier(types.string),
-//   items: types.array(TrashItem)
-// });
-
-// const TrashItemStore = types.model("TrashItemStore", {
-//   data: types.map(TrashItemCollection),
-//   isLoading: false
-// });
-
 const TrashStore = types
   .model("TrashStore", {
     boards: types.optional(types.array(Board), []),

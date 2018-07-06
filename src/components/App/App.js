@@ -41,6 +41,9 @@ injectGlobal`
   .drag-class {
     opacity: 0.5;
   }
+  .with-popup:hover .popup {
+    display: block;
+  }
 `;
 
 const Wrapper = styled.div`

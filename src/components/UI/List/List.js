@@ -6,15 +6,16 @@ import { Container, Draggable } from "react-smooth-dnd";
 import styled from "styled-components";
 import AddCard from "./AddCard";
 import EditForm from "../EditForm/EditForm";
-import ItemControls from "../ItemControls/ItemControls";
+import PopupButtons from "../PopupButtons/PopupButtons";
 
-export const ListWrapper = styled.div`
+export const Wrapper = styled.div`
   width: 30rem;
   margin: 0.5em;
   padding: 0.5em;
   background: ${props => props.theme.bgList};
   box-shadow: ${props => props.theme.boxShadow};
   border-radius: 0.2em;
+  word-wrap: break-word;
 `;
 
 export const ListHeader = styled.div`
@@ -23,11 +24,8 @@ export const ListHeader = styled.div`
   margin-bottom: 0.5em;
   text-align: ${props => (props.centered ? "center" : "inherit")};
   background: ${props => props.theme.bgHeader};
-  color: ${props => props.theme.textLight};
+  color: ${props => props.theme.textAlt};
   border-radius: 0.2em;
-  &:hover .item-controls {
-    display: block;
-  }
 `;
 
 class List extends Component {
@@ -67,32 +65,33 @@ class List extends Component {
   render() {
     const { list, onListDelete } = this.props;
     const editMode = this.state.editMode;
+    const popupItems = [
+      { handler: this.toggleEditMode, icon: "edit" },
+      { handler: () => onListDelete(list), icon: "trash" }
+    ];
 
     return (
-      <ListWrapper>
-        {!editMode && (
-          <ListHeader className="list-header">
-            {list.name}
-            <ItemControls onEdit={this.toggleEditMode} onDelete={() => onListDelete(list)} />
-          </ListHeader>
-        )}
-        {editMode && (
-          <ListHeader>
+      <Wrapper>
+        <ListHeader className={editMode ? "" : "draggable with-popup"}>
+          {editMode ? (
             <EditForm
               text={list.name}
               onSubmit={this.handleUpdate}
               onCancel={this.toggleEditMode}
             />
-          </ListHeader>
-        )}
+          ) : (
+            list.name
+          )}
+          <PopupButtons items={popupItems} />
+        </ListHeader>
         <Container
           onDrop={this.onCardDrop}
           getChildPayload={this.movingCardPayload}
           dragClass="drag-class"
           groupName="cards"
           dragBeginDelay={5}
-          dragHandleSelector=".card-wrapper"
-          nonDragAreaSelector=".item-controls"
+          dragHandleSelector=".draggable"
+          nonDragAreaSelector=".non-draggable"
         >
           {list.cards.map(card => (
             <Draggable key={card.id} style={{ overflow: "inherit" }}>
@@ -101,7 +100,7 @@ class List extends Component {
           ))}
         </Container>
         <AddCard onSubmit={list.addCard} />
-      </ListWrapper>
+      </Wrapper>
     );
   }
 }

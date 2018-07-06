@@ -56,6 +56,41 @@ Object {
 }
 `;
 
+exports[`can move list 1`] = `
+Object {
+  "deleted": 0,
+  "id": 1,
+  "lists": Array [
+    Object {
+      "boardId": 1,
+      "cards": Array [],
+      "deleted": 0,
+      "id": 2,
+      "name": "second",
+      "order": 2,
+    },
+    Object {
+      "boardId": 1,
+      "cards": Array [],
+      "deleted": 0,
+      "id": 3,
+      "name": "third",
+      "order": 3,
+    },
+    Object {
+      "boardId": 1,
+      "cards": Array [],
+      "deleted": 0,
+      "id": 1,
+      "name": "first",
+      "order": 4,
+    },
+  ],
+  "name": "My new project",
+  "order": 0,
+}
+`;
+
 exports[`creates instance successfully 1`] = `
 Object {
   "deleted": 0,

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-import { Link } from "react-router-dom";
 import { Wrapper, MainBlock, BoardList } from "./IndexView.sc";
 import AddItem from "../UI/AddItem/AddItem";
 import ListItem from "./ListItem";
@@ -21,9 +20,7 @@ class IndexView extends Component {
           <BoardList>
             {boards.map(board => (
               <li key={board.id}>
-                <Link to={`/boards/${board.id}`}>
-                  <ListItem board={board} onDelete={deleteBoard} />
-                </Link>
+                <ListItem board={board} onDelete={deleteBoard} />
               </li>
             ))}
           </BoardList>
