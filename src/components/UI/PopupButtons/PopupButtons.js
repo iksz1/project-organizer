@@ -30,6 +30,10 @@ const Icon = ({ name, size }) => {
   return <El size={size} />;
 };
 
+Icon.propTypes = {
+  name: PropTypes.string,
+  size: PropTypes.string
+};
 export default class PopupButtons extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),

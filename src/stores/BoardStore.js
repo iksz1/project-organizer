@@ -1,16 +1,14 @@
 import { types, flow, getParent } from "mobx-state-tree";
-import { Board } from "../models/Board";
+import Board from "./models/Board";
 import db from "../utils/dbWrapper";
 
 const BoardStore = types
   .model("BoardStore", {
-    board: types.maybe(Board),
-    isLoading: false
+    board: types.maybe(Board)
   })
   .actions(self => ({
     fetchData: flow(function* fetchData(boardId) {
       try {
-        self.isLoading = true;
         const data = yield db.getWithRelated("boards", boardId);
         if (data.boards[0]) {
           self.board = parseData(data);
@@ -18,8 +16,6 @@ const BoardStore = types
         }
       } catch (error) {
         console.error(error); //eslint-disable-line
-      } finally {
-        self.isLoading = false;
       }
     })
   }));

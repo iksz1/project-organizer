@@ -7,44 +7,7 @@ import Board from "../Board";
 import Trash from "../Trash";
 import Settings from "../Settings";
 import MainHeader from "../MainHeader/MainHeader";
-import styled, { ThemeProvider, injectGlobal } from "styled-components";
-
-injectGlobal`
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
-  }
-  html {
-    font-size: 62.5%;
-  }
-  body {
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-    font-size: 1.5rem;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  main {
-    display: flex;
-    flex-flow: column;
-    flex: auto;
-  }
-  input,
-  textarea,
-  select {
-    color: inherit;
-  }
-  button {
-    font-family: inherit;
-  }
-  .drag-class {
-    opacity: 0.5;
-  }
-  .with-popup:hover .popup {
-    display: block;
-  }
-`;
+import styled, { ThemeProvider } from "styled-components";
 
 const Wrapper = styled.div`
   background: ${props => props.theme.bgMain};
@@ -52,6 +15,12 @@ const Wrapper = styled.div`
   min-height: 100vh;
   display: flex;
   flex-flow: column;
+`;
+
+const MainContent = styled.main`
+  display: flex;
+  flex-flow: column;
+  flex: auto;
 `;
 
 class App extends Component {
@@ -67,14 +36,14 @@ class App extends Component {
         <Router>
           <Wrapper>
             <MainHeader />
-            <main>
+            <MainContent>
               <Switch>
                 <Route exact path="/boards/:boardId" component={Board} />
                 <Route exact path="/trash" component={Trash} />
                 <Route exact path="/settings" component={Settings} />
                 <Route component={BoardIndex} />
               </Switch>
-            </main>
+            </MainContent>
           </Wrapper>
         </Router>
       </ThemeProvider>

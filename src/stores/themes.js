@@ -2,7 +2,7 @@ import { lighten } from "polished";
 
 export default {
   default: {
-    _name: "yellow and blue",
+    _name: "Sunny",
     bgMain: "#A2B5C8",
     bgHeader: "#FFF1DC",
     bgList: "#FFF1DC",
@@ -32,7 +32,7 @@ export default {
     boxShadowAlt: "0px 1px 5px 0px rgba(34, 36, 38, 0.15)"
   },
   gray: {
-    _name: "gray",
+    _name: "Gray",
     bgMain: "#fbfbfb",
     bgHeader: "#e8e8e8",
     bgList: "#e8e8e8",
@@ -47,7 +47,7 @@ export default {
     boxShadowAlt: "0px 1px 5px 0px rgba(34, 36, 38, 0.15)"
   },
   isabelline: {
-    _name: "isabelline",
+    _name: "Isabelline",
     bgMain: "#rgba(241, 237, 238, 0.6)",
     bgHeader: "#9ea5c1",
     bgList: "#F1EDEE",

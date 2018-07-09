@@ -32,8 +32,8 @@ class ItemGroup extends Component {
             {item.name || item.text}
             <PopupButtons
               items={[
-                { handler: () => onRestore(item), icon: "restore" },
-                { handler: () => onDelete(item), icon: "remove" }
+                { handler: () => onRestore(name, item), icon: "restore" },
+                { handler: () => onDelete(name, item), icon: "remove" }
               ]}
               btnSize="1.2em"
             />

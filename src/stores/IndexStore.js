@@ -1,11 +1,10 @@
 import { types, flow, destroy, getParent } from "mobx-state-tree";
-import { Board } from "../models/Board";
+import Board from "./models/Board";
 import db from "../utils/dbWrapper";
 
 const IndexStore = types
-  .model("BoardIndexStore", {
-    boards: types.optional(types.array(Board), []),
-    isLoading: false
+  .model("IndexStore", {
+    boards: types.optional(types.array(Board), [])
   })
   .actions(self => ({
     addBoard: flow(function* addBoard(name) {
@@ -20,13 +19,10 @@ const IndexStore = types
 
     fetchData: flow(function* fetchData() {
       try {
-        self.isLoading = true;
         self.boards = yield db.getAll("boards");
         getParent(self).changeTitle("Board index");
       } catch (error) {
         console.error(error); //eslint-disable-line
-      } finally {
-        self.isLoading = false;
       }
     })
   }));

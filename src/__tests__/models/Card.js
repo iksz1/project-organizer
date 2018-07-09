@@ -1,5 +1,5 @@
 import db from "../../utils/dbWrapper";
-import { Card } from "../../models/Card";
+import Card from "../../stores/models/Card";
 
 jest.mock("../../utils/dbWrapper");
 

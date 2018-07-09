@@ -1,5 +1,5 @@
 import db from "../../utils/dbWrapper";
-import { Board } from "../../models/Board";
+import Board from "../../stores/models/Board";
 
 jest.mock("../../utils/dbWrapper");
 

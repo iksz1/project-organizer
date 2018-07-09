@@ -1,58 +1,51 @@
-import { types, flow, destroy, applySnapshot, getParent } from "mobx-state-tree";
+import { types, flow, destroy, getParent } from "mobx-state-tree";
 import db from "../utils/dbWrapper";
-import { Board } from "../models/Board";
-import { List } from "../models/List";
-import { Card } from "../models/Card";
+import { BoardBase } from "./models/Board";
+import { ListBase } from "./models/List";
+import { CardBase } from "./models/Card";
+
+const Items = types.model("Items", {
+  boards: types.optional(types.array(BoardBase), []),
+  lists: types.optional(types.array(ListBase), []),
+  cards: types.optional(types.array(CardBase), [])
+});
 
 const TrashStore = types
   .model("TrashStore", {
-    boards: types.optional(types.array(Board), []),
-    lists: types.optional(types.array(List), []),
-    cards: types.optional(types.array(Card), []),
-    isLoading: false
+    data: types.optional(Items, {})
   })
   .actions(self => ({
-    deleteItem: flow(function* deleteItem(item) {
-      if (item.listId != null) {
-        yield db.remove("cards", item);
-      } else if (item.boardId != null) {
-        yield db.remove("lists", item);
-        self.cards = self.cards.filter(card => card.listId !== item.id);
-      } else {
-        yield db.remove("boards", item);
-        self.cards = self.cards.filter(card => card.boardId !== item.id);
-        self.lists = self.lists.filter(list => list.boardId !== item.id);
+    deleteItem: flow(function* deleteItem(group, item) {
+      yield db.remove(group, item);
+
+      //remove related trashed items
+      if (group === "lists") {
+        self.data.cards = self.data.cards.filter(card => card.listId !== item.id);
+      } else if (group === "boards") {
+        self.data.cards = self.data.cards.filter(card => card.boardId !== item.id);
+        self.data.lists = self.data.lists.filter(list => list.boardId !== item.id);
       }
+
       destroy(item);
     }),
 
-    restoreItem: flow(function* restoreItem(item) {
-      if (item.listId != null) {
-        yield db.restore("cards", item.id);
-      } else if (item.boardId != null) {
-        yield db.restore("lists", item.id);
-      } else {
-        yield db.restore("boards", item.id);
-      }
+    restoreItem: flow(function* restoreItem(group, item) {
+      yield db.restore(group, item.id);
       destroy(item);
     }),
 
     fetchData: flow(function* fetchData() {
       try {
-        self.isLoading = true;
-        const data = yield db.getTrashed();
-        applySnapshot(self, data);
+        self.data = yield db.getTrashed();
         getParent(self).changeTitle("Trash");
       } catch (error) {
         console.error(error); //eslint-disable-line
-      } finally {
-        self.isLoading = false;
       }
     })
   }))
   .views(self => ({
-    get itemGroups() {
-      return ["boards", "lists", "cards"];
+    get entries() {
+      return Object.keys(self.data).map(key => [key, self.data[key]]);
     }
   }));
 

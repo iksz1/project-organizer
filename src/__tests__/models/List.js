@@ -1,5 +1,5 @@
 import db from "../../utils/dbWrapper";
-import { List } from "../../models/List";
+import List from "../../stores/models/List";
 
 jest.mock("../../utils/dbWrapper");
 

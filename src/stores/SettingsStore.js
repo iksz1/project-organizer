@@ -13,7 +13,7 @@ const SettingsStore = types
           self.themeName = name;
         }
       } catch (error) {
-        console.error("Failed loading theme: ", error.message); //eslint-disable-line
+        console.error("Failed to load theme: ", error.message); //eslint-disable-line
       }
     },
 
@@ -22,7 +22,7 @@ const SettingsStore = types
       try {
         localStorage.setItem("_theme", name);
       } catch (error) {
-        console.error("Failed saving theme: ", error.message); //eslint-disable-line
+        console.error("Failed to save theme: ", error.message); //eslint-disable-line
       }
     }
   }))

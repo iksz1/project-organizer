@@ -25,20 +25,19 @@ const Wrapper = styled.div`
 
 class TrashView extends Component {
   static propTypes = {
-    store: PropTypes.object
+    store: PropTypes.object.isRequired
   };
 
   render() {
-    const store = this.props.store;
-    const { itemGroups, restoreItem, deleteItem } = this.props.store;
+    const { entries, restoreItem, deleteItem } = this.props.store;
 
     return (
       <Wrapper>
-        {itemGroups.map(group => (
+        {entries.map(([name, items]) => (
           <ItemGroup
-            key={group}
-            name={group}
-            items={store[group]}
+            key={name}
+            name={name}
+            items={items}
             onDelete={deleteItem}
             onRestore={restoreItem}
           />

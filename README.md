@@ -1,6 +1,6 @@
 ## Personal project organizer
 
-Lets you quickly create boards, lists and cards. The data is stored locally in IndexedDB.
+Lets you quickly create boards, lists and cards. Data is stored locally in IndexedDB.
 
 Demo: [https://organizer.netlify.com/](https://organizer.netlify.com/)
 
