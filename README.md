@@ -4,7 +4,7 @@ Lets you quickly create boards, lists and cards. Data is stored locally in Index
 
 Demo: [https://organizer.netlify.com/](https://organizer.netlify.com/)
 
-[![app.png](https://s33.postimg.cc/9tqsdkwwv/app.png)](https://postimg.cc/image/xxhk1vfdn/)
+[![app.png](https://s33.postimg.cc/6vzdnvu5b/app.png)](https://postimg.cc/image/mhgp7u63f/)
 
 ### Features
 

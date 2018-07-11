@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   margin: 0.5em;
 `;
 
-const AddItemForm = styled.form`
+const Form = styled.form`
   display: flex;
   input {
     padding: 0.5em;
@@ -51,21 +51,23 @@ export default class AddItem extends Component {
   };
 
   render() {
-    const value = this.state.value;
+    const { value } = this.state;
+    const { hint } = this.props;
 
     return (
       <Wrapper>
-        <AddItemForm onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={value}
             onChange={this.handleChange}
-            placeholder={this.props.hint}
+            placeholder={hint}
+            aria-label="item text"
           />
           <button type="submit" disabled={value ? false : true}>
             Add
           </button>
-        </AddItemForm>
+        </Form>
       </Wrapper>
     );
   }

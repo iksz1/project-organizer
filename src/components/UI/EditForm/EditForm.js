@@ -20,6 +20,7 @@ export const Button = styled.button`
 `;
 
 export const TextArea = styled.textarea`
+  display: block;
   width: 100%;
   padding: 0 2px;
   resize: vertical;
@@ -28,6 +29,9 @@ export const TextArea = styled.textarea`
   background: ${props => props.theme.bgInput};
   border: ${props => props.theme.borderInput};
   border-radius: 0.2em;
+  &:not(:last-child) {
+    margin-bottom: 2px;
+  }
 `;
 
 export default class EditForm extends Component {
@@ -54,13 +58,13 @@ export default class EditForm extends Component {
   };
 
   render() {
-    const text = this.state.text;
+    const { text } = this.state;
     const { onCancel } = this.props;
 
     return (
       <Wrapper>
         <form onSubmit={this.handleSubmit}>
-          <TextArea value={text} onChange={this.handleTextChange} rows="2" />
+          <TextArea value={text} onChange={this.handleTextChange} rows="2" aria-label="item text" />
           <Button type="submit" disabled={text ? false : true}>
             submit
           </Button>&nbsp;

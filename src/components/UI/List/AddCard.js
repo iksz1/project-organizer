@@ -27,7 +27,12 @@ export default class AddCard extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <TextArea value={inputValue} onChange={this.handleTextChange} rows="2" />
+          <TextArea
+            value={inputValue}
+            onChange={this.handleTextChange}
+            rows="2"
+            aria-label="card text"
+          />
           {inputValue && <Button type="submit">submit</Button>}
         </form>
       </div>

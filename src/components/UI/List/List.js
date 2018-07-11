@@ -25,6 +25,7 @@ export const ListHeader = styled.div`
   text-align: ${props => (props.centered ? "center" : "inherit")};
   background: ${props => props.theme.bgHeader};
   color: ${props => props.theme.textAlt};
+  font-weight: 500;
   border-radius: 0.2em;
 `;
 

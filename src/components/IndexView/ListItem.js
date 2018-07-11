@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { darken } from "polished";
 import EditForm from "../UI/EditForm/EditForm";
 import PopupButtons from "../UI/PopupButtons/PopupButtons";
 
@@ -16,14 +17,14 @@ const Wrapper = styled.div`
   border-radius: 0.2em;
   text-align: center;
   word-wrap: break-word;
+  &:hover {
+    background: ${props => darken(0.05, props.theme.bgCard)};
+  }
 `;
 
 const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: none;
-  &:hover {
-    font-weight: 500;
-  }
 `;
 
 class ListItem extends Component {

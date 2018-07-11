@@ -7,7 +7,7 @@ import styled, { keyframes } from "styled-components";
 const appear = keyframes`
 0% {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateX(-30px);
 }
 100% {
   opacity: 1;
