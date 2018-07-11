@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { inject } from "mobx-react";
-import SettingsView from "./SettingsView/SettingsView";
+import SettingsView from "./SettingsView";
 
 class Settings extends Component {
   static propTypes = {

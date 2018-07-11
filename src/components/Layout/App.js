@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { observer, inject } from "mobx-react";
-import BoardIndex from "../BoardIndex";
-import Board from "../Board";
-import Trash from "../Trash";
-import Settings from "../Settings";
-import MainHeader from "../MainHeader/MainHeader";
+import BoardIndex from "../Pages/index/BoardIndex";
+import Board from "../Pages/board/Board";
+import Trash from "../Pages/trash/Trash";
+import Settings from "../Pages/settings/Settings";
+import MainHeader from "./MainHeader";
 import styled, { ThemeProvider } from "styled-components";
 
 const Wrapper = styled.div`

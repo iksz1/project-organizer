@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 import styled from "styled-components";
-import EditForm from "../EditForm/EditForm";
-import PopupButtons from "../PopupButtons/PopupButtons";
+import EditForm from "./EditForm";
+import PopupButtons from "./PopupButtons";
 
 export const Wrapper = styled.div`
   padding: 0.5em 1em;

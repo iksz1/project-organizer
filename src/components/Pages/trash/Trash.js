@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
-import TrashView from "./TrashView/TrashView";
+import TrashView from "./TrashView";
 
 class Trash extends Component {
   static propTypes = {

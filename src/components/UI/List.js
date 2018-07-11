@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-import Card from "../Card/Card";
 import { Container, Draggable } from "react-smooth-dnd";
 import styled from "styled-components";
+import Card from "./Card";
 import AddCard from "./AddCard";
-import EditForm from "../EditForm/EditForm";
-import PopupButtons from "../PopupButtons/PopupButtons";
+import EditForm from "./EditForm";
+import PopupButtons from "./PopupButtons";
 
 export const Wrapper = styled.div`
   width: 30rem;

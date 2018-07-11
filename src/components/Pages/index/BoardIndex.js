@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
-import IndexView from "./IndexView/IndexView";
+import IndexView from "./BoardIndexView";
 
 class BoardIndex extends Component {
   static propTypes = {

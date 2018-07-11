@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import List from "../UI/List/List";
-import AddList from "../UI/AddItem/AddItem";
+import List from "../../UI/List";
+import AddList from "../../UI/AddItem";
 import { observer } from "mobx-react";
 import { Container, Draggable } from "react-smooth-dnd";
 import styled, { keyframes } from "styled-components";

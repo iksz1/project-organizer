@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, TextArea } from "../EditForm/EditForm";
+import { Button, TextArea } from "./EditForm";
 
 export default class AddCard extends Component {
   static propTypes = {

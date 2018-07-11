@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Wrapper as ListWrapper, ListHeader } from "../UI/List/List";
-import { Wrapper as CardWrapper } from "../UI/Card/Card";
+import { Wrapper as ListWrapper, ListHeader } from "../../UI/List";
+import { Wrapper as CardWrapper } from "../../UI/Card";
 
 const Wrapper = styled.div`
   display: flex;

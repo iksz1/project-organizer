@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-import PopupButtons from "../UI/PopupButtons/PopupButtons";
-import { Wrapper, ListHeader } from "../UI/List/List";
-import { Wrapper as CardWrapper } from "../UI/Card/Card";
+import PopupButtons from "../../UI/PopupButtons";
+import { Wrapper, ListHeader } from "../../UI/List";
+import { Wrapper as CardWrapper } from "../../UI/Card";
 
 const ItemWrapper = CardWrapper.extend`
   &:last-child {

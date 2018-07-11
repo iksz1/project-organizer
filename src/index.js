@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "mobx-react";
 import registerServiceWorker from "./registerServiceWorker";
-import App from "./components/App/App";
+import App from "./components/Layout/App";
 import store from "./stores/RootStore";
 import { injectGlobal } from "styled-components";
 

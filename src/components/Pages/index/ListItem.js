@@ -4,8 +4,8 @@ import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { darken } from "polished";
-import EditForm from "../UI/EditForm/EditForm";
-import PopupButtons from "../UI/PopupButtons/PopupButtons";
+import EditForm from "../../UI/EditForm";
+import PopupButtons from "../../UI/PopupButtons";
 
 const Wrapper = styled.div`
   position: relative;
