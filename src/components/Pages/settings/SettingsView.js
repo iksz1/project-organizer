@@ -44,7 +44,7 @@ class SettingsView extends Component {
         <ListWrapper>
           <ListHeader>Theme</ListHeader>
           <ListItem>
-            <select value={themeName} onChange={this.handleThemeChange}>
+            <select value={themeName} onChange={this.handleThemeChange} aria-label="theme">
               {themeNames.map(name => (
                 <option key={name} value={name}>
                   {name}

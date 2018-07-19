@@ -41,10 +41,6 @@ class MainHeader extends Component {
     store: PropTypes.object
   };
 
-  static defaultProps = {
-    showHomeBtn: true
-  };
-
   render() {
     const { title } = this.props.store;
 

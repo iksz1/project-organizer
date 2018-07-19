@@ -51,7 +51,6 @@ class List extends Component {
 
   onCardDrop = ({ addedIndex, payload }) => {
     const { list, onCardMove } = this.props;
-    //same as (index !== null && index !== undefined)
     if (addedIndex != null) {
       const { fromArr, fromIndex, card } = payload;
       onCardMove(card, { fromArr, fromIndex, toArr: list.cards, toIndex: addedIndex });

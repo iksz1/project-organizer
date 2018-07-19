@@ -27,6 +27,7 @@ const Wrapper = styled.div`
   animation-delay: 200ms;
   animation-fill-mode: backwards;
 `;
+
 class BoardView extends Component {
   static propTypes = {
     store: PropTypes.object
@@ -34,7 +35,6 @@ class BoardView extends Component {
 
   onListDrop = ({ addedIndex, payload }) => {
     const { board } = this.props.store;
-    //same as (index !== null && index !== undefined)
     if (addedIndex != null) {
       const { fromArr, fromIndex, list } = payload;
       board.moveList(list, { fromArr, fromIndex, toArr: fromArr, toIndex: addedIndex });
