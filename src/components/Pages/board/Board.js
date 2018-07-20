@@ -6,16 +6,16 @@ import BoardView from "./BoardView";
 class Board extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
-    match: PropTypes.object
+    match: PropTypes.object.isRequired
   };
 
   componentDidMount() {
-    const boardStore = this.props.store.board;
-    boardStore.fetchData(this.props.match.params.boardId);
+    const { store, match } = this.props;
+    store.boardStore.fetchData(match.params.boardId);
   }
 
   render() {
-    const boardStore = this.props.store.board;
+    const { boardStore } = this.props.store;
 
     return <BoardView store={boardStore} />;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
-import IndexView from "./BoardIndexView";
+import BoardIndexView from "./BoardIndexView";
 
 class BoardIndex extends Component {
   static propTypes = {
@@ -9,14 +9,14 @@ class BoardIndex extends Component {
   };
 
   componentDidMount() {
-    const indexStore = this.props.store.index;
+    const { indexStore } = this.props.store;
     indexStore.fetchData();
   }
 
   render() {
-    const indexStore = this.props.store.index;
+    const { indexStore } = this.props.store;
 
-    return <IndexView store={indexStore} />;
+    return <BoardIndexView store={indexStore} />;
   }
 }
 

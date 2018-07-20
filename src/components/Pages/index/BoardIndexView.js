@@ -37,7 +37,7 @@ const BoardList = styled.ul`
   list-style: none;
 `;
 
-class IndexView extends Component {
+class BoardIndexView extends Component {
   static propTypes = {
     store: PropTypes.object
   };
@@ -62,4 +62,4 @@ class IndexView extends Component {
   }
 }
 
-export default observer(IndexView);
+export default observer(BoardIndexView);

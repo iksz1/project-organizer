@@ -15,6 +15,7 @@ ReactDOM.render(
 
 registerServiceWorker();
 
+//global styles
 injectGlobal`
   *,
   *::before,

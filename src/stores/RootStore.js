@@ -7,10 +7,10 @@ import makeInspectable from "mobx-devtools-mst";
 
 const RootStore = types
   .model("RootStore", {
-    index: types.maybe(IndexStore),
-    board: types.maybe(BoardStore),
-    settings: types.maybe(SettingsStore),
-    trash: types.maybe(TrashStore),
+    indexStore: types.maybe(IndexStore),
+    boardStore: types.maybe(BoardStore),
+    settingsStore: types.maybe(SettingsStore),
+    trashStore: types.maybe(TrashStore),
     title: ""
   })
   .actions(self => ({
@@ -21,9 +21,9 @@ const RootStore = types
 
 export default makeInspectable(
   RootStore.create({
-    index: IndexStore.create(),
-    board: BoardStore.create(),
-    settings: SettingsStore.create(),
-    trash: TrashStore.create()
+    indexStore: IndexStore.create(),
+    boardStore: BoardStore.create(),
+    settingsStore: SettingsStore.create(),
+    trashStore: TrashStore.create()
   })
 );

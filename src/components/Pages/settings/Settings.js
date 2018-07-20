@@ -13,7 +13,7 @@ class Settings extends Component {
   }
 
   render() {
-    const settingsStore = this.props.store.settings;
+    const { settingsStore } = this.props.store;
 
     return <SettingsView store={settingsStore} />;
   }

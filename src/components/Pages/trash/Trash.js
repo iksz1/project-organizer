@@ -9,12 +9,12 @@ class Trash extends Component {
   };
 
   componentDidMount() {
-    const trashStore = this.props.store.trash;
+    const { trashStore } = this.props.store;
     trashStore.fetchData();
   }
 
   render() {
-    const trashStore = this.props.store.trash;
+    const { trashStore } = this.props.store;
 
     return <TrashView store={trashStore} />;
   }

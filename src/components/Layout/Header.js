@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { Link } from "react-router-dom";
@@ -36,33 +36,27 @@ const Nav = styled.div`
   }
 `;
 
-class MainHeader extends Component {
-  static propTypes = {
-    store: PropTypes.object
-  };
+const Header = ({ store }) => (
+  <Wrapper>
+    <Title>
+      <Link to="/" aria-label="Index">
+        <IndexIcon size="1.2em" />
+      </Link>
+      {store.title}
+    </Title>
+    <Nav>
+      <Link to="/trash" aria-label="Trash">
+        <TrashIcon />
+      </Link>
+      <Link to="/settings" aria-label="Settings">
+        <SettingsIcon />
+      </Link>
+    </Nav>
+  </Wrapper>
+);
 
-  render() {
-    const { title } = this.props.store;
+Header.propTypes = {
+  store: PropTypes.object.isRequired
+};
 
-    return (
-      <Wrapper>
-        <Title>
-          <Link to="/" aria-label="Index">
-            <IndexIcon size="1.2em" />
-          </Link>
-          {title}
-        </Title>
-        <Nav>
-          <Link to="/trash" aria-label="Trash">
-            <TrashIcon />
-          </Link>
-          <Link to="/settings" aria-label="Settings">
-            <SettingsIcon />
-          </Link>
-        </Nav>
-      </Wrapper>
-    );
-  }
-}
-
-export default inject("store")(observer(MainHeader));
+export default inject("store")(observer(Header));
