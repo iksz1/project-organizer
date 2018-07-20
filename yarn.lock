@@ -5171,9 +5171,9 @@ mobx-react@^5.2.3:
     hoist-non-react-statics "^2.5.0"
     react-lifecycles-compat "^3.0.2"
 
-mobx-state-tree@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/mobx-state-tree/-/mobx-state-tree-2.2.0.tgz#10bb84e090ed7700333ac52d05b304579fc78dc4"
+mobx-state-tree@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mobx-state-tree/-/mobx-state-tree-3.0.0.tgz#8799d2caddfe265de90544c4bcd453635c5c5a8e"
 
 mobx@^5.0.3:
   version "5.0.3"
@@ -8047,7 +8047,7 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   dependencies:
     iconv-lite "0.4.19"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.4:
+whatwg-fetch@>=0.10.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
 

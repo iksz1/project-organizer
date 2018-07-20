@@ -52,7 +52,7 @@
     "mobx": "^5.0.3",
     "mobx-devtools-mst": "^0.9.18",
     "mobx-react": "^5.2.3",
-    "mobx-state-tree": "^2.2.0",
+    "mobx-state-tree": "^3.0.0",
     "polished": "^1.9.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
